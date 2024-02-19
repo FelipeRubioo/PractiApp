@@ -10,6 +10,8 @@ import Home from './screens/Home';
 import WelcomeScreen from './screens/Welcome';
 import OlvidePassword from './screens/OlvidePassword';
 import Registrarse from './screens/Registrarse';
+import NavigationFeed from './components/NavigationFeed'
+import ObtenerPractica from './hooks/ObtenerPractica'
 
 export default function App() {
 
@@ -28,11 +30,15 @@ export default function App() {
   }
 
 
-  return (
+  /* return (
     <NavigationContainer>
       <MyStack/>
     </NavigationContainer>
-  );
+  ); */
+
+  return (
+    <NavigationFeed />
+  )
 }
 
 const styles = StyleSheet.create({
