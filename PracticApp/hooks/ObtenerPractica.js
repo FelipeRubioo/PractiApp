@@ -5,7 +5,7 @@ import db from "../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
 export default function ObtenerPractica() {
-  const [data, setData] = useState([]); // State to hold the fetched data
+  let [data, setData] = useState([]); // State to hold the fetched data
 
   useEffect(() => {
     async function fetchDataFromFirestore() {

@@ -11,6 +11,7 @@ import Home from './screens/Home';
 import WelcomeScreen from './screens/Welcome';
 import OlvidePassword from './screens/OlvidePassword';
 import Registrarse from './screens/Registrarse';
+import NavigationFeed from './components/NavigationFeed'
 
 export default function App() {
 
@@ -24,13 +25,14 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="OlvidePassword" component={OlvidePassword} />
         <Stack.Screen name="Registrarse" component={Registrarse} />
+        <Stack.Screen name="Feed" component={NavigationFeed} options={{headerShown: false}} />
       </Stack.Navigator>
     );
   }
 
 
-   return (
-    <NavigationContainer>
+  return (
+    <NavigationContainer independent={true}>
       <MyStack/>
     </NavigationContainer> 
   ); 

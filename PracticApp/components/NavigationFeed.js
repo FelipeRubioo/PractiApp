@@ -46,7 +46,7 @@ const StackPractica = () => {
 const Tab = createBottomTabNavigator()
 const Tabs = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {

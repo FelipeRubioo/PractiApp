@@ -4,8 +4,7 @@ import {
   View,
   FlatList,
   StyleSheet,
-  Text,
-  StatusBar
+  Text
 } from 'react-native'
 import PracticaPreview from '../components/practicaPreview'
 import ObtenerPractica from '../hooks/ObtenerPractica'
@@ -42,8 +41,9 @@ import ObtenerPractica from '../hooks/ObtenerPractica'
 
 const FeedAlumnos = () => {
   //Tomamos los datos de hook ObtenerPractica
-  const DATA = ObtenerPractica()
-  //console.log('zzz', DATA)
+  let DATA = ObtenerPractica()
+
+  console.log('zzz', DATA)
 
   //Esta funcion renderiza PracticaPreview pasandole los parametros
   const renderItem = ({ item, index }) => (
