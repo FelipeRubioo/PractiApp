@@ -56,14 +56,14 @@ const styles = StyleSheet.create({
     Practicas: {
         color: '#FFFFFF',
         fontSize: 30,
-        padding: 5,
+        padding: 0,
         paddingBottom:20,
         fontFamily: 'Montserrat'
     },
     Bienvenido:{
         color: "#ffff",
         fontSize: 20,
-        padding: 5,
+        padding: 1,
         paddingBottom:20,
         fontFamily: 'Montserrat'
     },
