@@ -35,9 +35,29 @@ const FeedHeader = () => {
 const Stack = createNativeStackNavigator()
 const StackPractica = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="FeedAlumnos" component={FeedAlumnos} options={{headerShown: false}} />
-      <Stack.Screen name="PracticaCompleta" component={PracticaCompleta} />
+    <Stack.Navigator 
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#013396',
+          height: 180
+        }
+      }}
+    >
+      <Stack.Screen name="FeedAlumnos" component={FeedAlumnos} options={{
+          headerTitle: (props) => <FeedHeader {...props} />
+        }} 
+      />
+      <Stack.Screen name="PracticaCompleta" component={PracticaCompleta} options={{
+          title: 'Practica',
+          headerTitleStyle: {
+            fontSize: 25
+          },
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#013396'
+          }
+        }} 
+      />
     </Stack.Navigator>
   )
 }
@@ -46,16 +66,12 @@ const StackPractica = () => {
 const Tab = createBottomTabNavigator()
 const Tabs = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
             borderTopColor: 'white',
             shadowColor: 'white'
-          },
-          headerStyle: {
-            backgroundColor: '#013396',
-            height: 180
           }
         }}
       >
@@ -69,7 +85,7 @@ const Tabs = () => {
               color={focused ? '#EAA627' : 'black'}
               />
             ),
-            headerTitle: (props) => <FeedHeader {...props} /> 
+            headerShown: false
           }}
         >
           {() => <StackPractica />}
