@@ -18,7 +18,7 @@ export default function Login(props) {
             await signInWithEmailAndPassword(auth, email, password)
             Alert.alert('Iniciando sesión', 'Accediendo...')
             // te lleva al feed
-            props.navigation.navigate('Home')
+            props.navigation.navigate('Feed')
         } catch (error) {
             console.log(error);
             Alert.alert('Error', 'El usuario o la contraseña son incorrectos')

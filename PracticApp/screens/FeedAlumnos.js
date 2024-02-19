@@ -10,36 +10,6 @@ import {
 import PracticaPreview from '../components/practicaPreview'
 import ObtenerPractica from '../hooks/ObtenerPractica'
 
-//Datos falsos para probar localmente el feed
-/* const DATA = [
-  {
-    id: '1',
-    Fecha: '12 de febrero de 2024',
-    Titulo: 'Practicas en Encora',
-    Categoria: 'Desarrollo web'
-  },
-  {
-    id: '2',
-    Fecha: '10 de febrero de 2024',
-    Titulo: 'Practicas en Ford',
-    Categoria: 'Redes'
-  },
-  {
-    id: '3',
-    Fecha: '10 de febrero de 2024',
-    Titulo: 'Practicas en Ford',
-    Categoria: 'Redes'
-  },
-  {
-    id: '4',
-    Fecha: '10 de febrero de 2024',
-    Titulo: 'Practicas en Ford',
-    Categoria: 'Redes'
-  }
-]; */
-
-
-
 const FeedAlumnos = () => {
   //Tomamos los datos de hook ObtenerPractica
   const DATA = ObtenerPractica()
