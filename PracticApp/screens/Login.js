@@ -2,10 +2,10 @@ import { Text, StyleSheet, View, Image, TextInput, TouchableOpacity, Alert} from
 import React, { useState } from 'react'
 
 // CONEXION A BD
-import { getAuth , signInWithEmailAndPassword} from 'firebase/auth'
-import { app } from "../firebaseConfig.js"
+import appFirebase from '../firebaseConfig'
+import { getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+const auth = getAuth(appFirebase)
 
-const auth = getAuth(app)
 
 export default function Login(props) {
 
@@ -17,7 +17,6 @@ export default function Login(props) {
         try {
             await signInWithEmailAndPassword(auth, email, password)
             Alert.alert('Iniciando sesión', 'Accediendo...')
-            // te lleva al feed
             props.navigation.navigate('Feed')
         } catch (error) {
             console.log(error);
@@ -36,36 +35,46 @@ export default function Login(props) {
     return (
         <View style={styles.padre}>
             <View>
-                <Text>Iniciar Sesión</Text>
+                <Text style={{fontWeight:700, fontSize:25, marginRight:170, marginBottom:24}}>Inicia Sesión</Text>
             </View>
             <View>
-                <Text>Bienvenido de vuelta</Text>
+                <Text style={{fontSize:16, color:'rgb(170,170,170)', marginRight:170}}>Bienvenido de vuelta</Text>
             </View>
             <View style={styles.tarjeta}>
+                <View style={styles.loginImages}>
+                    <Image source={require('../assets/Message.png')}/>
+                </View>
+                <Text style={styles.textoLoginContra}>Correo</Text>
                 <View style={styles.cajaTexto}>
-                    <TextInput placeholder='correo' style={{paddingHorizontal:15}} 
+                    <TextInput placeholder='' style={{paddingHorizontal:15}} 
                     onChangeText={(text)=>setEmail(text)}/>
                 </View>
-                <View style={styles.cajaTexto}>
-                    <TextInput placeholder='Contraseña' style={{paddingHorizontal:15}} secureTextEntry={true}
-                    onChangeText={(text)=>setPassword(text)} />
+                <View style={styles.loginImages}>
+                    <Image source={require('../assets/Lock.png')}/>
                 </View>
-                <View style={styles.PadreBoton}>
-                    <TouchableOpacity style={styles.cajaBoton} onPress={logueo}>
-                        <Text style={styles.textoBoton}>Sign In</Text>
-                    </TouchableOpacity>
+                <Text style={styles.textoLoginContra}>Contraseña</Text>
+                <View style={styles.cajaTexto}>
+                    <TextInput placeholder='' style={{paddingHorizontal:15}} secureTextEntry={true}
+                    onChangeText={(text)=>setPassword(text)} />
                 </View>
                 <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={OlvidePassword}>
-                        <Text style={{color:'orange', textDecorationLine: 'underline'}}>¿Olvidaste la contraseña?</Text>
+                        <Text style={{color:'rgb(247, 161, 26)', textDecorationLine: 'underline'}}>¿Olvidaste la contraseña?</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={styles.RegistrarseContenedor}>
-                <Text style={styles.textResgistrarse}>¿No tienes cuenta?</Text>
-                <TouchableOpacity onPress={Registrarse}>
-                    <Text style={styles.textRegistrarse1}>Registrate</Text>
-                </TouchableOpacity>
+            <View style={styles.tarjetaBottom}>
+                <View style={styles.RegistrarseContenedor}>
+                    <Text style={styles.textResgistrarse}>¿No tienes cuenta?</Text>
+                    <TouchableOpacity onPress={Registrarse}>
+                        <Text style={styles.textRegistrarse1}>Regístrate</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.PadreBoton}>
+                    <TouchableOpacity style={styles.cajaBoton} onPress={logueo}>
+                        <Image source={require('../assets/Arrow - Right.png')} style={{marginLeft:20, marginTop:20}}/>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
@@ -85,51 +94,77 @@ const styles = StyleSheet.create({
         borderColor:'white'
     },
     tarjeta:{
-        margin:20,
+        marginTop:20,
         backgroundColor:'white',
         borderRadius:20,
         width:'90%',
         padding: '20%',
+        paddingTop:20,
+        paddingBottom: 190,
         shadowColor:'#000',
         shadowOffset: {
             width:0,
             height:2
         },
         shadowOpacity:0.25,
-        shadowRadius:4,
-        elevation:5,
-        
+        shadowRadius:4
+    },
+    loginImages:{
+        left: -27,
+        top:30
+    },
+    textoLoginContra:{
+        color: 'rgb(193, 198, 208)',
+        fontSize: 14,
+        marginLeft:18,
+        top:8
     },
     cajaTexto:{
-        paddingVertical:20,
-        backgroundColor: '#cccccc40',
-        borderRadius:30,
+        paddingVertical:0,
+        background: 'transparent',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgb(193, 198, 208)',
+        borderRadius:0,
         marginVertical:10
+    },
+    tarjetaBottom:{
+        flex:2,
+        flexDirection: 'row'
     },
     PadreBoton:{
         alignItems:'center',
+        borderRadius:90,
+        marginTop:75,
+        marginLeft: 30
     },
     cajaBoton:{
-        backgroundColor:'#525FE1',
-        borderRadius:30,
-        paddingVertical:20,
-        width:150,
-        marginTop:20
+        backgroundColor:'rgb(1, 51, 151)',
+        borderRadius:40,
+        paddingTop:0,
+        paddingBottom:0,
+        width:60,
+        height:60,
+        marginTop:0
     },
     textoBoton:{
         textAlign:'center',
-        color:'white'
+        marginBottom:4,
+        color:'white',
+        fontSize:40
     },
     RegistrarseContenedor:{
+        marginTop: 0,
         flexDirection: 'row', // Establece la dirección del contenedor como fila
         alignItems: 'center', // Alinea los elementos verticalmente en el centro
         justifyContent: 'center', // Alinea los elementos horizontalmente en el centro (puedes ajustar esto según sea necesario)
     },
     textResgistrarse: {
+        color: 'rgb(170,170,170)',
         fontSize: 16,
         marginHorizontal: 3, // Añade un margen horizontal entre los elementos de texto
     },
     textRegistrarse1:{
-        color:'orange'
+        color:'rgb(247, 161, 26)',
+        fontSize: 16
     }
 })
