@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { createUser } from '../hooks/auth_signup_password';
 
 const Registrarse = (props) => {
   // Estados para los valores de los campos del formulario
@@ -15,6 +16,8 @@ const Registrarse = (props) => {
   const handleSubmit = () => {
     // Aquí puedes implementar la lógica para enviar los datos del formulario
     console.log('Formulario enviado:', { email, name, lastName, campus, career, password, confirmPassword });
+
+    createUser(email, password);
   };
 
   // Ir al Login
