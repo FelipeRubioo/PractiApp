@@ -1,21 +1,47 @@
 import React from 'react'
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native'
+import {Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import FeedAlumnos from '../screens/FeedAlumnos'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Feather } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
 import { SearchBar } from '@rneui/themed';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PracticaCompleta from '../screens/PracticaCompleta';
+import { singOut } from '../hooks/logout';
+import WelcomeScreen from '../screens/Welcome';
 
 //Aqui se perzonaliza el header
 const FeedHeader = () => {
+  
+  const navigation = useNavigation();
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Cerrar sesión',
+      '¿Estas seguro de que deseas cerrrar sesión?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel'
+        },
+        {
+          text: 'Cerrar Sesión',
+          onPress: () => {
+            singOut();
+            // TODO: enviar a la ventana de welcome
+            //navigation.navigate('WelcomeScreen')
+          }
+        }
+      ]
+    )
+  }
+
   return (
     <View style={styles.headerWrapper}>
       <View style={styles.container}>
         <Text style={styles.titulo}>Practicas Unison</Text>
-        <TouchableOpacity style={styles.settings}>
+        <TouchableOpacity style={styles.settings} onPress={handleLogout}>
           <Feather name={'settings'} color={'white'} size={30}  />
         </TouchableOpacity>
       </View>
