@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
     cajaTexto:{
         paddingVertical:0,
-        background: 'transparent',
+        backgroundColor: 'transparent',
         borderBottomWidth: 1,
         borderBottomColor: 'rgb(193, 198, 208)',
         borderRadius:0,
