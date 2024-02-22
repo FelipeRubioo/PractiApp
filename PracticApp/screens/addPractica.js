@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { postPractica } from "../hooks/postPractica";
 
-const addPractica = () => {
+const AddPractica = () => {
   // Estados para los valores de los campos del formulario
   // falta imagen
-  
+
   const [formValues, setFormValues] = useState({
     title: "",
     desc: "",
@@ -33,6 +33,7 @@ const addPractica = () => {
   const handleSubmit = () => {
     postPractica(formValues);
   };
+  
   return (
     <View style={styles.container}>
       <FormInput
@@ -90,3 +91,5 @@ const addPractica = () => {
     </View>
   );
 };
+
+export default AddPractica;

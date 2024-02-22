@@ -13,6 +13,7 @@ import WelcomeScreen from './screens/Welcome';
 import OlvidePassword from './screens/OlvidePassword';
 import Registrarse from './screens/Registrarse';
 import NavigationFeed from './components/NavigationFeed'
+import AddPractica from './screens/AddPractica';
 
 export default function App() {
 
@@ -27,6 +28,7 @@ export default function App() {
         <Stack.Screen name="Feed" component={NavigationFeed} options={{headerShown: false}} />
         <Stack.Screen name="OlvidePassword" component={OlvidePassword} />
         <Stack.Screen name="Registrarse" component={Registrarse} />
+        <Stack.Screen name="AddPractica" component={AddPractica} />
       </Stack.Navigator>
     );
   }
