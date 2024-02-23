@@ -13,9 +13,9 @@ import WelcomeScreen from '../screens/Welcome';
 
 //Aqui se perzonaliza el header
 const FeedHeader = () => {
-  
-  const navigation = useNavigation();
 
+  const navigation = useNavigation();
+  
   const handleLogout = () => {
     Alert.alert(
       'Cerrar sesión',
@@ -29,8 +29,8 @@ const FeedHeader = () => {
           text: 'Cerrar Sesión',
           onPress: () => {
             singOut();
-            // TODO: enviar a la ventana de welcome
-            //navigation.navigate('WelcomeScreen')
+            // TODO:
+            //navigation.dispatch(StackActions.popToTop());
           }
         }
       ]

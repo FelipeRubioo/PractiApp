@@ -21,12 +21,12 @@ export default function App() {
   function MyStack() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} />
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <Stack.Screen name="Feed" component={NavigationFeed} options={{headerShown: false}} />
-        <Stack.Screen name="OlvidePassword" component={OlvidePassword} />
-        <Stack.Screen name="Registrarse" component={Registrarse} />
+        <Stack.Screen name="OlvidePassword" component={OlvidePassword} options={{headerShown: false}}/>
+        <Stack.Screen name="Registrarse" component={Registrarse} options={{headerShown: false}}/>
       </Stack.Navigator>
     );
   }
