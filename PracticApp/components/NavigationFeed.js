@@ -10,6 +10,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PracticaCompleta from '../screens/PracticaCompleta';
 import { singOut } from '../hooks/logout';
 import WelcomeScreen from '../screens/Welcome';
+import AddPractica from '../screens/addPractica';
+
 
 //Aqui se perzonaliza el header
 const FeedHeader = () => {
@@ -84,6 +86,7 @@ const StackPractica = () => {
           }
         }} 
       />
+      <Stack.Screen name="AddPractica" component={AddPractica} />
     </Stack.Navigator>
   )
 }

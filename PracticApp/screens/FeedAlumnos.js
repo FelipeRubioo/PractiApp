@@ -10,11 +10,16 @@ import {
 } from "react-native";
 import PracticaPreview from "../components/practicaPreview";
 import ObtenerPractica from "../hooks/ObtenerPractica";
+import { useNavigation } from "@react-navigation/native";
+
+
 
 const FeedAlumnos = () => {
   //Tomamos los datos de hook ObtenerPractica
   const DATA = ObtenerPractica();
-  console.log("zzz", DATA);
+  //console.log("zzz", DATA);
+
+  const { navigate } = useNavigation()
 
   //Esta funcion renderiza PracticaPreview pasandole los parametros
   const renderItem = ({ item, index }) => (
@@ -42,7 +47,7 @@ const FeedAlumnos = () => {
         keyExtractor={(item) => item.id}
       />
       <View style={{ alignItems: "center" }}>
-        <TouchableOpacity onPress={() => navigation.navigate("AddPractica")}>
+        <TouchableOpacity onPress={() => navigate("AddPractica")}>
           <Text
             style={{
               color: "rgb(247, 161, 26)",
