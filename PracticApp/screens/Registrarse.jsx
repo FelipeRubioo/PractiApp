@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } fro
 import { createUser } from '../hooks/auth_signup_password';
 import RNPickerSelect from 'react-native-picker-select';
 import { ScrollView } from 'react-native-gesture-handler';
+import { FontAwesome } from '@expo/vector-icons';
 
 const Registrarse = (props) => {
   // Estados para los valores de los campos del formulario
@@ -13,6 +14,7 @@ const Registrarse = (props) => {
   const [career, setCareer] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
 
   // Función para manejar el envío del formulario
   const handleSubmit = () => {
@@ -112,24 +114,36 @@ const Registrarse = (props) => {
           <Image source={require("../assets/Lock.png")}/>
         </View>
         <Text style={styles.textInfo}>Contraseña</Text>
-        <TextInput
-            style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={true}
-          />
+        <View style={styles.passwordInput}>
+          <TextInput
+              style={styles.input}
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword} // Ocultar o mostrar contraseña basado en el estado
+              placeholderTextColor="#ccc"
+            />
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <FontAwesome name={showPassword ? 'eye-slash' : 'eye'} size={24} color="black" style={styles.ojo} />
+            </TouchableOpacity>
+        </View>
       </View>
       <View>
         <View style={styles.images}>
             <Image source={require('../assets/Lock.png')}/>
         </View>
         <Text style={styles.textInfo}>Confirmar contraseña</Text>
-        <TextInput
-          style={styles.input}
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry={true}
-        />
+        <View style={styles.passwordInput}>
+          <TextInput
+            style={styles.input}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry={!showPassword} // Ocultar o mostrar contraseña basado en el estado
+            placeholderTextColor="#ccc"
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <FontAwesome name={showPassword ? 'eye-slash' : 'eye'} size={24} color="black" style={styles.ojo} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.tarjetaBottom}>
@@ -156,7 +170,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
     backgroundColor:'white',
-    paddingTop:50
+    paddingTop:50,
+    paddingBottom: 20
   },
   images:{
     left: 4,
@@ -174,7 +189,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'rgb(193, 198, 208)',
     borderRadius:0,
-    marginVertical:10
+    marginVertical:10,
+    flex:1
   },
   button: {
     backgroundColor: '#007BFF',
@@ -218,6 +234,16 @@ const styles = StyleSheet.create({
     width:60,
     height:60,
     marginTop:0
+  },
+  passwordInput:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: 'white',
+    marginVertical: 10,
+  },
+  ojo:{
+    marginRight:10,
   }
 });
 
