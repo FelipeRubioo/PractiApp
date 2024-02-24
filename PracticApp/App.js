@@ -7,12 +7,11 @@ import { NavigationContainer} from "@react-navigation/native"
 // importar los componentes (screens)
 import Login from './screens/Login';
 import Home from './screens/Home';
-import FeedAlumnos from './screens/FeedAlumnos';
-import PracticaCompleta from './screens/PracticaCompleta';
 import WelcomeScreen from './screens/Welcome';
 import OlvidePassword from './screens/OlvidePassword';
 import Registrarse from './screens/Registrarse';
 import NavigationFeed from './components/NavigationFeed'
+
 
 export default function App() {
 
