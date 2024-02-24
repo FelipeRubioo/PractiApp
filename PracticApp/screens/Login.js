@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, Image, TextInput, TouchableOpacity, Alert} from 'react-native'
+import { Text, StyleSheet, View, Image, TextInput, TouchableOpacity, Alert, SafeAreaView} from 'react-native'
 import React, { useState } from 'react'
 
 // CONEXION A BD
@@ -33,7 +33,7 @@ export default function Login(props) {
 
 
     return (
-        <View style={styles.padre}>
+        <SafeAreaView style={styles.padre}>
             <View>
                 <Text style={{fontWeight:700, fontSize:25, marginRight:170, marginBottom:24}}>Inicia Sesión</Text>
             </View>
@@ -76,7 +76,7 @@ export default function Login(props) {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'white'
+        backgroundColor:'white',
+        paddingTop:100
     },
     profile:{
         width:100,
