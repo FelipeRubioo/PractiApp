@@ -85,8 +85,7 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'white',
-        paddingTop:50
+        backgroundColor:'white'
     },
     profile:{
         width:100,
@@ -111,6 +110,7 @@ const styles = StyleSheet.create({
         shadowRadius:4
     },
     loginImages:{
+        resizeMode: 'cover',
         left: -27,
         top:30
     },
