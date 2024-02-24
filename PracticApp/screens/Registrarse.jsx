@@ -42,124 +42,122 @@ const Registrarse = (props) => {
   }
   return (
     <ScrollView>
-
-    
-    <View style={styles.container}>
-      <View>
-        <View style={styles.images}>
-          <Image source={require('../assets/Message.png')} />
-        </View>
-        <Text style={styles.textInfo}>Correo institucional</Text>
-        <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
-      <View>
-        <View style={styles.images}>
-          <Image source={require('../assets/Profile.png')}/>
-        </View>
-        <Text style={styles.textInfo}>Nombre(s)</Text>
-        <TextInput
+      <View style={styles.container}>
+        <View>
+          <View style={styles.images}>
+            <Image source={require('../assets/Message.png')} />
+          </View>
+          <Text style={styles.textInfo}>Correo institucional</Text>
+          <TextInput
             style={styles.input}
-            value={name}
-            onChangeText={setName}
-        />
-      </View>
-      <View>
-        <View style={styles.images}>
-          <Image source={require('../assets/Profile.png')}/>
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
         </View>
-        <Text style={styles.textInfo}>Apellido(s)</Text>
-        <TextInput
-              style={styles.input}
-              value={lastName}
-              onChangeText={setLastName}
-        />
-      </View>
-      <View>
-        <View style={styles.images}>
-          <Image source={require('../assets/Books.png')}/>
-        </View>
-      <Text style={styles.textInfo}>Campus</Text>
-      <RNPickerSelect style={styles.input}
-        onValueChange={(campus) => setCampus(campus)}
-        items={[
-          { label: "Hermosillo", value: "Hermosillo"},
-          { label: "Cajeme", value: "Cajeme" },
-          { label: "Caborca", value: "Caborca" },
-          { label: "Nogales", value: "Nogales" },
-          { label: "Santa Ana", value: "Santa Ana" },
-          { label: "Navojoa", value: "Navojoa" },
-        ]}
-      />
-      </View>
-      <View>
-        <View style={styles.images}>
-          <Image source={require('../assets/Books.png')}/>
-        </View>
-        <Text style={styles.textInfo}>Carrera</Text>
-        <RNPickerSelect style={styles.input}
-          onValueChange={(career) => setCareer(career)}
-          items={[
-            { label: "Ingeniería en Sistemas", value: "Ingeniería en Sistemas"}
-          ]}
-        />
-      </View>
-      <View>
-        <View style={styles.images}>
-          <Image source={require("../assets/Lock.png")}/>
-        </View>
-        <Text style={styles.textInfo}>Contraseña</Text>
-        <View style={styles.passwordInput}>
+        <View>
+          <View style={styles.images}>
+            <Image source={require('../assets/Profile.png')}/>
+          </View>
+          <Text style={styles.textInfo}>Nombre(s)</Text>
           <TextInput
               style={styles.input}
-              value={password}
-              onChangeText={setPassword}
+              value={name}
+              onChangeText={setName}
+          />
+        </View>
+        <View>
+          <View style={styles.images}>
+            <Image source={require('../assets/Profile.png')}/>
+          </View>
+          <Text style={styles.textInfo}>Apellido(s)</Text>
+          <TextInput
+                style={styles.input}
+                value={lastName}
+                onChangeText={setLastName}
+          />
+        </View>
+        <View>
+          <View style={styles.images}>
+            <Image source={require('../assets/Books.png')}/>
+          </View>
+        <Text style={styles.textInfo}>Campus</Text>
+        <RNPickerSelect style={styles.input}
+          onValueChange={(campus) => setCampus(campus)}
+          items={[
+            { label: "Hermosillo", value: "Hermosillo"},
+            { label: "Cajeme", value: "Cajeme" },
+            { label: "Caborca", value: "Caborca" },
+            { label: "Nogales", value: "Nogales" },
+            { label: "Santa Ana", value: "Santa Ana" },
+            { label: "Navojoa", value: "Navojoa" },
+          ]}
+        />
+        </View>
+        <View>
+          <View style={styles.images}>
+            <Image source={require('../assets/Books.png')}/>
+          </View>
+          <Text style={styles.textInfo}>Carrera</Text>
+          <RNPickerSelect style={styles.input}
+            onValueChange={(career) => setCareer(career)}
+            items={[
+              { label: "Ingeniería en Sistemas", value: "Ingeniería en Sistemas"}
+            ]}
+          />
+        </View>
+        <View>
+          <View style={styles.images}>
+            <Image source={require("../assets/Lock.png")}/>
+          </View>
+          <Text style={styles.textInfo}>Contraseña</Text>
+          <View style={styles.passwordInput}>
+            <TextInput
+                style={styles.input}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword} // Ocultar o mostrar contraseña basado en el estado
+                placeholderTextColor="#ccc"
+              />
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <FontAwesome name={showPassword ? 'eye-slash' : 'eye'} size={24} color="black" style={styles.ojo} />
+              </TouchableOpacity>
+          </View>
+        </View>
+        <View>
+          <View style={styles.images}>
+              <Image source={require('../assets/Lock.png')}/>
+          </View>
+          <Text style={styles.textInfo}>Confirmar contraseña</Text>
+          <View style={styles.passwordInput}>
+            <TextInput
+              style={styles.input}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
               secureTextEntry={!showPassword} // Ocultar o mostrar contraseña basado en el estado
               placeholderTextColor="#ccc"
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <FontAwesome name={showPassword ? 'eye-slash' : 'eye'} size={24} color="black" style={styles.ojo} />
             </TouchableOpacity>
-        </View>
-      </View>
-      <View>
-        <View style={styles.images}>
-            <Image source={require('../assets/Lock.png')}/>
-        </View>
-        <Text style={styles.textInfo}>Confirmar contraseña</Text>
-        <View style={styles.passwordInput}>
-          <TextInput
-            style={styles.input}
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry={!showPassword} // Ocultar o mostrar contraseña basado en el estado
-            placeholderTextColor="#ccc"
-          />
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <FontAwesome name={showPassword ? 'eye-slash' : 'eye'} size={24} color="black" style={styles.ojo} />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <View style={styles.tarjetaBottom}>
-        <View style={styles.contText}>
-          <Text>¿Ya tienes cuenta? </Text>
-          <TouchableOpacity onPress={Login}>
-          <Text style={styles.Text2}>Inicia sesión</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.PadreBoton}>
-                <TouchableOpacity style={styles.cajaBoton} onPress={handleSubmit}>
-                    <Image source={require('../assets/Arrow - Right.png')} style={{marginLeft:20, marginTop:20}}/>
-                </TouchableOpacity>
           </View>
         </View>
-      </View>
+
+        <View style={styles.tarjetaBottom}>
+          <View style={styles.contText}>
+            <Text>¿Ya tienes cuenta? </Text>
+            <TouchableOpacity onPress={Login}>
+            <Text style={styles.Text2}>Inicia sesión</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.PadreBoton}>
+                  <TouchableOpacity style={styles.cajaBoton} onPress={handleSubmit}>
+                      <Image source={require('../assets/Arrow - Right.png')} style={{marginLeft:20, marginTop:20}}/>
+                  </TouchableOpacity>
+            </View>
+          </View>
+        </View>
       </ScrollView>
   );
 };
@@ -170,7 +168,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
     backgroundColor:'white',
-    paddingTop:50,
+    paddingTop:10,
     paddingBottom: 20
   },
   images:{
@@ -185,7 +183,7 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingVertical:0,
-    background: 'transparent',
+    backgroundColor: 'transparent',
     borderBottomWidth: 1,
     borderBottomColor: 'rgb(193, 198, 208)',
     borderRadius:0,
@@ -218,7 +216,7 @@ const styles = StyleSheet.create({
   },
   tarjetaBottom:{
     flex:2,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   PadreBoton:{
     alignItems:'center',
@@ -229,8 +227,6 @@ const styles = StyleSheet.create({
   cajaBoton:{
     backgroundColor:'rgb(1, 51, 151)',
     borderRadius:40,
-    paddingTop:0,
-    paddingBottom:0,
     width:60,
     height:60,
     marginTop:0

@@ -11,6 +11,8 @@ import WelcomeScreen from './screens/Welcome';
 import OlvidePassword from './screens/OlvidePassword';
 import Registrarse from './screens/Registrarse';
 import NavigationFeed from './components/NavigationFeed'
+import { Button } from '@rneui/themed';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 export default function App() {
@@ -21,20 +23,26 @@ export default function App() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} />
-        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+        <Stack.Screen name="Login" component={Login}
+        options={{
+          title: ''
+        }}
+        />
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <Stack.Screen name="Feed" component={NavigationFeed} options={{headerShown: false}} />
         <Stack.Screen name="OlvidePassword" component={OlvidePassword} options={{headerShown: false}}/>
-        <Stack.Screen name="Registrarse" component={Registrarse} options={{headerShown: false}}/>
+        <Stack.Screen name="Registrarse" component={Registrarse} options={{title:''}}/>
       </Stack.Navigator>
     );
   }
 
 
   return (
-    <NavigationContainer>
-      <MyStack/>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <MyStack/>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

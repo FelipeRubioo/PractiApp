@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'white',
-        paddingTop:100
+        paddingTop:10
     },
     profile:{
         width:100,
