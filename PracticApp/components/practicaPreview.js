@@ -6,6 +6,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import moment from 'moment'
+import 'moment/locale/es'
 
 //Array de colores para alternar los colores de las preview
 const colors = ['rgba(234, 166, 39, .3)', 'rgba(1, 51, 150, .2)']
@@ -25,10 +27,19 @@ const PracticaPreview = (props) => {
     )
   }
 
+  //Hace el formato de la fecha
+  try{
+    var t = new Date(
+      fecha.seconds * 1000 + fecha.nanoseconds / 1000000
+    );
+  } catch(error){
+    console.error(error)
+  }
+
   //Regresamos un 'Touchable que convierte el preview en un boton
   return(
     <TouchableOpacity style={[styles.item, {backgroundColor: colors[index % colors.length]}]} onPress={onPress}>
-      <Text style={styles.fecha}>{fecha}</Text>
+      <Text style={styles.fecha}>{moment(t).format('LL')}</Text>
       <Text style={styles.titulo}>{titulo}</Text>
       <Text style={styles.categoria}>{categoria}</Text>
     </TouchableOpacity>
