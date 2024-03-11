@@ -7,8 +7,11 @@ import {
   StyleSheet,
 } from "react-native";
 import { postPractica } from "../hooks/postPractica";
+import { useNavigation } from "@react-navigation/native";
 
 const AddPractica = () => {
+  const navigation = useNavigation();
+
   // Estados para los valores de los campos del formulario
   // falta imagen
 
@@ -31,7 +34,7 @@ const AddPractica = () => {
   };
 
   const handleSubmit = () => {
-    postPractica(formValues);
+    postPractica(formValues, navigation);
   };
  
   return (

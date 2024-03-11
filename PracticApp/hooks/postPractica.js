@@ -1,7 +1,9 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { Alert } from "react-native";
 
-export async function postPractica(formValues) {
+export async function postPractica(formValues, navigation) {
+
   try {
     const childrenCollectionRef = collection(
       db,
@@ -25,7 +27,11 @@ export async function postPractica(formValues) {
       Contacto: formValues.contacto,
     });
 
+    Alert.alert('Listo', 'Se publicó la practica', [
+      {text: 'Aceptar', onPress: () => navigation.navigate("FeedAlumnos")}
+    ])
     console.log("Document written with ID: ", docRef.id);
+
   } catch (error) {
     console.error("Error writing document: ", error);
     throw error;

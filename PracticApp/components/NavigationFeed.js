@@ -31,6 +31,7 @@ const FeedHeader = () => {
           text: 'Cerrar Sesión',
           onPress: () => {
             singOut();
+            navigation.navigate('WelcomeScreen');
             // TODO:
             //navigation.dispatch(StackActions.popToTop());
           }
@@ -87,6 +88,7 @@ const StackPractica = () => {
         }} 
       />
       <Stack.Screen name="AddPractica" component={AddPractica} />
+      <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}} />
     </Stack.Navigator>
   )
 }
@@ -114,7 +116,8 @@ const Tabs = () => {
               color={focused ? '#EAA627' : 'black'}
               />
             ),
-            headerShown: false
+            headerShown: false,
+            unmountOnBlur: true
           }}
         >
           {() => <StackPractica />}
