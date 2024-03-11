@@ -28,7 +28,7 @@ const FeedAlumnos = () => {
       index={index}
       titulo={item.Titulo}
       categoria="Categoria: Deasrrollo Web"
-      fecha="12 de febrero de 2024"
+      fecha={item.Fecha}
     />
   );
 
