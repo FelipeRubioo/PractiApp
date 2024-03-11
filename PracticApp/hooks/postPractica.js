@@ -1,30 +1,31 @@
-import { doc, setDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 export async function postPractica(formValues) {
   try {
-    const ref = doc(
+    const childrenCollectionRef = collection(
       db,
       "Campus",
-      formValues.campus,
+      "Hermosillo",
       "Facultades",
-      formValues.facultad,
-      formValues.carrera,
+      "Ingeniería",
+      "Ingeniería en Sistemas",
       "Practicas",
       "Children"
     );
 
-    await setDoc(ref, {
-      title: formValues.title,
-      desc: formValues.desc,
-      reqs: formValues.reqs,
-      ubi: formValues.ubi,
-      horario: formValues.horario,
-      paga: formValues.paga,
-      vacantes: formValues.vacantes,
-      contacto: formValues.contacto,
+    const docRef = await addDoc(childrenCollectionRef, {
+      Titulo: formValues.title,
+      Desc: formValues.desc,
+      Requisitos: formValues.reqs,
+      Ubi: formValues.ubi,
+      Horario: formValues.horario,
+      Paga: formValues.paga,
+      Vacantes: formValues.vacantes,
+      Contacto: formValues.contacto,
     });
-    console.log("Document successfully written!");
+
+    console.log("Document written with ID: ", docRef.id);
   } catch (error) {
     console.error("Error writing document: ", error);
     throw error;
