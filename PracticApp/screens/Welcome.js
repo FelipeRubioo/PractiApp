@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     Bienvenido:{
         color: "black",
         fontSize: 25,
-        fontWeight: 900 ,
+        fontWeight: '900' ,
         padding: 1,
         right: 5,
         paddingBottom:20,
