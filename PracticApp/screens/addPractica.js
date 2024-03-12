@@ -9,13 +9,17 @@ import {
 import { postPractica } from "../hooks/postPractica";
 import { useNavigation } from "@react-navigation/native";
 
+// img picker
+
+import * as ImagePicker from "expo-image-picker";
+
 const AddPractica = () => {
   const navigation = useNavigation();
 
   // Estados para los valores de los campos del formulario
   // falta imagen
 
-    const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState({
     title: "",
     desc: "",
     reqs: "",
@@ -36,7 +40,30 @@ const AddPractica = () => {
   const handleSubmit = () => {
     postPractica(formValues, navigation);
   };
- 
+
+  const handleImagePick = async () => {
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permissionResult.granted) {
+      Alert.alert(
+        "Permiso denegado",
+        "Por favor, activa el permiso para acceder a tus fotos."
+      );
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      aspect: [9, 16],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setFormValues({ ...formValues, image: result.uri });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -96,6 +123,15 @@ const AddPractica = () => {
         value={formValues.contacto}
         onChangeText={(text) => handleChange("contacto", text)}
       />
+
+      <TouchableOpacity style={styles.button} onPress={handleImagePick}>
+        <Text style={styles.buttonText}>Seleccionar imagen</Text>
+      </TouchableOpacity>
+
+      {formValues.image && (
+        <Image source={{ uri: formValues.image }} style={styles.image} />
+      )}
+
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Publicar</Text>
       </TouchableOpacity>
@@ -106,27 +142,27 @@ const AddPractica = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingHorizontal: 20,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: "#007BFF",
     paddingVertical: 10,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 16,
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
-  }
+  },
 });
 
 export default AddPractica;
