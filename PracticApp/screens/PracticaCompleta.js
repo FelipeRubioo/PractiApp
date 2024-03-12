@@ -4,7 +4,7 @@ import moment from 'moment'
 import 'moment/locale/es'
 
 const PracticaCompleta = ({ route }) => {
-  const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi } = route.params
+  const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha } = route.params
   //Formato de la fecha
   try{
     var t = new Date(
