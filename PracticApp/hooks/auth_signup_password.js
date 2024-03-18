@@ -14,7 +14,7 @@ export const createUser = async (email, password, name, lastName, campus, career
       password
     );
 
-    await setDoc(doc(db, 'Alumnos', userCredential.user.uid) , {
+    await setDoc(doc(db, 'Usuarios', userCredential.user.uid) , {
       email: email,
       name: name,
       lname: lastName,
