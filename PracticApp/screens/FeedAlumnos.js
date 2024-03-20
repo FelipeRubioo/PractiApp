@@ -46,7 +46,7 @@ const FeedAlumnos = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-      <View style={{ alignItems: "center" }}>
+      {/* <View style={{ alignItems: "center" }}>
         <TouchableOpacity onPress={() => navigate("AddPractica")}>
           <Text
             style={{
@@ -57,7 +57,7 @@ const FeedAlumnos = () => {
             Agregar Practica
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

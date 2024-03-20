@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -31,9 +31,7 @@ import Observe from "../hooks/observer";
 
 
 const Navigation = () => {
-  
   Observe();
-
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
@@ -121,6 +119,8 @@ const Navigation = () => {
   };
 
   const Tabs = () => {
+    const rol = Observe();
+    console.log("zzzzzzxxxxx: ", rol)
     return (
       <Tab.Navigator
         screenOptions={{
@@ -146,6 +146,23 @@ const Navigation = () => {
         >
           {() => <StackPractica />}
         </Tab.Screen>
+        {(rol == '2' || rol == '3' || rol == '4') ? (<Tab.Screen
+          name="  "
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name={"plus"}
+                size={28}
+                color={focused ? "#EAA627" : "black"}
+              />
+            ),
+            headerShown: false,
+            unmountOnBlur: true,
+          }}
+        >
+          {() => <AddPractica />}
+        </Tab.Screen>
+        ) : null }
       </Tab.Navigator>
     );
   };
