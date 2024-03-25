@@ -123,6 +123,7 @@ const Navigation = () => {
   };
 
   const Tabs = () => {
+    const rol = Observe();
     return (
       <Tab.Navigator
         screenOptions={{
@@ -148,6 +149,22 @@ const Navigation = () => {
         >
           {() => <StackPractica />}
         </Tab.Screen>
+        {(rol == '2' || rol == '3' || rol == '4') ? (<Tab.Screen
+          name="  "
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name={"plus"}
+                size={28}
+                color={focused ? "#EAA627" : "black"}
+              />
+            ),
+            headerShown: false,
+            unmountOnBlur: true,
+          }}
+        >
+          {() => <AddPractica />}
+        </Tab.Screen> ) : null }
       </Tab.Navigator>
     );
   };
