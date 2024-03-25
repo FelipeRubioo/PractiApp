@@ -33,7 +33,8 @@ const Registrarse = (props) => {
     // Aquí puedes implementar la lógica para enviar los datos del formulario
     console.log('Formulario enviado:', { email, name, lastName, campus, career, password, confirmPassword });
 
-    createUser(email, password, name, lastName, campus, career);
+    rol = "1"
+    createUser(email, password, name, lastName, campus, rol, career);
   };
   
   // Ir al Login

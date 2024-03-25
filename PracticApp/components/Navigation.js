@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -23,6 +23,8 @@ import WelcomeScreen from "../screens/Welcome";
 import Login from "../screens/Login";
 import OlvidePassword from "../screens/OlvidePassword";
 import Registrarse from "../screens/Registrarse";
+import RegistrarCoordinadorPracticas from "../screens/RegistrarCoordinadorPracticas"
+import RegistrarMaestro from "../screens/RegistrarMaestro";
 import NavigationFeed from "./NavigationFeed";
 import AddPractica from "../screens/addPractica";
 import PracticaCompleta from "../screens/PracticaCompleta";
@@ -31,7 +33,9 @@ import Observe from "../hooks/observer";
 
 
 const Navigation = () => {
+  
   Observe();
+
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
@@ -119,8 +123,6 @@ const Navigation = () => {
   };
 
   const Tabs = () => {
-    const rol = Observe();
-    console.log("zzzzzzxxxxx: ", rol)
     return (
       <Tab.Navigator
         screenOptions={{
@@ -146,23 +148,6 @@ const Navigation = () => {
         >
           {() => <StackPractica />}
         </Tab.Screen>
-        {(rol == '2' || rol == '3' || rol == '4') ? (<Tab.Screen
-          name="  "
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name={"plus"}
-                size={28}
-                color={focused ? "#EAA627" : "black"}
-              />
-            ),
-            headerShown: false,
-            unmountOnBlur: true,
-          }}
-        >
-          {() => <AddPractica />}
-        </Tab.Screen>
-        ) : null }
       </Tab.Navigator>
     );
   };
@@ -196,6 +181,16 @@ const Navigation = () => {
         <Stack.Screen
           name="Registrarse"
           component={Registrarse}
+          options={{ title: "" }}
+        />
+        <Stack.Screen
+          name="RegistrarCoordinadorPracticas"
+          component={RegistrarCoordinadorPracticas}
+          options={{ title: "" }}
+        />
+        <Stack.Screen
+          name="RegistrarMaestro"
+          component={RegistrarMaestro}
           options={{ title: "" }}
         />
       </Stack.Navigator>
