@@ -69,6 +69,12 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "white",
   },
+  container: {
+    flex: 1,
+    marginTop: 0,
+    padding: 16,
+    backgroundColor: "white",
+  },
 });
 
 export default FeedAlumnos;

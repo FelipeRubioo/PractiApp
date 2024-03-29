@@ -66,17 +66,25 @@ const AddPractica = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{paddingVertical:10}}>
+        <Text style={{fontSize: 24, fontWeight:700, paddingBottom:16}}>Crear oferta de práctica</Text>
+        <Text style={{fontSize: 16, fontWeight:700, paddingBottom:16, color:"rgb(1 51 150)"}}>Paso 2. Llena el formulario.</Text>
+        <Text style={{fontSize: 16, fontWeight:400, fontStyle:"italic", paddingBottom:8, paddingTop:14, color:"rgb(255 94 109)"}}>La oferta expirará después de un mes de su publicación.</Text>
+      </View>
+
       <TextInput
         style={styles.input}
         label="Título"
         placeholder="Título"
+        placeholderTextColor="rgb(170 170 170)"
         value={formValues.title}
         onChangeText={(text) => handleChange("title", text)}
       />
       <TextInput
         style={styles.input}
         label="Descripción"
-        placeholder="Descripción"
+        placeholder="Descripción de la oferta"
+        placeholderTextColor="rgb(170 170 170)"
         value={formValues.desc}
         onChangeText={(text) => handleChange("desc", text)}
       />
@@ -84,13 +92,24 @@ const AddPractica = () => {
         style={styles.input}
         label="Requisitos"
         placeholder="Requisitos"
+        placeholderTextColor="rgb(170 170 170)"
         value={formValues.reqs}
         onChangeText={(text) => handleChange("reqs", text)}
       />
       <TextInput
         style={styles.input}
+        label="Vacantes"
+        placeholder="Número de vacantes disponibles"
+        placeholderTextColor="rgb(170 170 170)"
+        value={formValues.vacantes}
+        onChangeText={(text) => handleChange("vacantes", text)}
+        keyboardType="numeric" // Use numeric keyboard for numerical input
+      />
+      <TextInput
+        style={styles.input}
         label="Ubicación"
-        placeholder="Ubicación"
+        placeholder="Ubicación de la empresa"
+        placeholderTextColor="rgb(170 170 170)"
         value={formValues.ubi}
         onChangeText={(text) => handleChange("ubi", text)}
       />
@@ -98,6 +117,7 @@ const AddPractica = () => {
         style={styles.input}
         label="Horario"
         placeholder="Horario"
+        placeholderTextColor="rgb(170 170 170)"
         value={formValues.horario}
         onChangeText={(text) => handleChange("horario", text)}
       />
@@ -105,35 +125,30 @@ const AddPractica = () => {
         style={styles.input}
         label="Salario"
         placeholder="Salario"
+        placeholderTextColor="rgb(170 170 170)"
         value={formValues.paga}
         onChangeText={(text) => handleChange("paga", text)}
       />
-      <TextInput
-        style={styles.input}
-        label="Vacantes"
-        placeholder="Vacantes"
-        value={formValues.vacantes}
-        onChangeText={(text) => handleChange("vacantes", text)}
-        keyboardType="numeric" // Use numeric keyboard for numerical input
-      />
+
       <TextInput
         style={styles.input}
         label="Contacto"
         placeholder="Contacto"
+        placeholderTextColor="rgb(170 170 170)"
         value={formValues.contacto}
         onChangeText={(text) => handleChange("contacto", text)}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleImagePick}>
-        <Text style={styles.buttonText}>Seleccionar imagen</Text>
+      <TouchableOpacity style={styles.button2} onPress={handleImagePick}>
+        <Text style={styles.buttonText2}>+ Adjuntar imagen</Text>
       </TouchableOpacity>
 
       {formValues.image && (
         <Image source={{ uri: formValues.image }} style={styles.image} />
       )}
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Publicar</Text>
+      <TouchableOpacity style={styles.button1} onPress={handleSubmit}>
+        <Text style={styles.buttonText1}>Subir Oferta</Text>
       </TouchableOpacity>
     </View>
   );
@@ -143,26 +158,43 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 26,
   },
-  button: {
-    backgroundColor: "#007BFF",
+  button1: {
+    backgroundColor: "rgb(55 175 70)",
     paddingVertical: 10,
-    borderRadius: 5,
+    marginBottom: 12,
+    borderRadius: 7,
     alignItems: "center",
   },
-  buttonText: {
+  button2: {
+    backgroundColor: "rgba(55 175 70 0.1)",
+    paddingVertical: 10,
+    marginBottom: 12,
+    borderRadius: 7,
+    alignItems: "center",
+  },
+  buttonText1: {
     color: "#FFFFFF",
-    fontSize: 16,
+    fontSize: 18,
+  },
+  buttonText2: {
+    color: "rgb(234 166 38)",
+    fontSize: 18,
   },
   input: {
     height: 40,
-    borderColor: "gray",
+    fontSize: 21,
+    borderColor: "rgb(193 199 208)",
     borderWidth: 1,
     borderRadius: 5,
-    marginBottom: 10,
+    marginBottom: 16,
     paddingHorizontal: 10,
+    paddingVertical: 8
   },
+  textStyle:{
+    fontSize: 24
+  }
 });
 
 export default AddPractica;
