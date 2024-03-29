@@ -81,6 +81,43 @@ const Navigation = () => {
     );
   };
 
+  //Header para el addPractica
+  const PracticaHeader = () => {
+    const navigation = useNavigation();
+    const handleLogout = () => {
+      Alert.alert(
+        "Cerrar sesión",
+        "¿Estas seguro de que deseas cerrrar sesión?",
+        [
+          {
+            text: "Cancelar",
+            style: "cancel",
+          },
+          {
+            text: "Cerrar Sesión",
+            onPress: () => {
+              singOut();
+              navigation.popToTop();
+              // TODO:
+              //navigation.dispatch(StackActions.popToTop());
+            },
+          },
+        ]
+      );
+    };
+
+    return (
+      <View style={styles.headerWrapper}>
+        <View style={styles.container}>
+          <Text style={styles.titulo}>Practicas Unison</Text>
+          <TouchableOpacity style={styles.settings} onPress={handleLogout}>
+            <Feather name={"settings"} color={"white"} size={30} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   const StackPractica = () => {
     return (
       <Stack.Navigator
@@ -131,6 +168,8 @@ const Navigation = () => {
             borderTopColor: "white",
             shadowColor: "white",
           },
+          
+          //headerTitle: (props) => <PracticaHeader {...props} />,
         }}
       >
         <Tab.Screen
@@ -159,8 +198,11 @@ const Navigation = () => {
                 color={focused ? "#EAA627" : "black"}
               />
             ),
-            headerShown: false,
-            unmountOnBlur: true,
+            headerStyle: {
+              backgroundColor: "#013396",
+              height: 110,
+            },
+            headerTitle: (props) => <PracticaHeader {...props} />,
           }}
         >
           {() => <AddPractica />}

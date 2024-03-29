@@ -5,6 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { postPractica } from "../hooks/postPractica";
 import { useNavigation } from "@react-navigation/native";
@@ -65,92 +67,96 @@ const AddPractica = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={{paddingVertical:10}}>
-        <Text style={{fontSize: 24, fontWeight:700, paddingBottom:16}}>Crear oferta de práctica</Text>
-        <Text style={{fontSize: 16, fontWeight:700, paddingBottom:16, color:"rgb(1 51 150)"}}>Paso 2. Llena el formulario.</Text>
-        <Text style={{fontSize: 16, fontWeight:400, fontStyle:"italic", paddingBottom:8, paddingTop:14, color:"rgb(255 94 109)"}}>La oferta expirará después de un mes de su publicación.</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={{paddingVertical:10}}>
+            <Text style={{fontSize: 24, fontWeight:700, paddingBottom:16}}>Crear oferta de práctica</Text>
+            <Text style={{fontSize: 16, fontWeight:700, paddingBottom:16, color:"rgb(1 51 150)"}}>Paso 2. Llena el formulario.</Text>
+            <Text style={{fontSize: 16, fontWeight:400, fontStyle:"italic", paddingBottom:8, paddingTop:14, color:"rgb(255 94 109)"}}>La oferta expirará después de un mes de su publicación.</Text>
+          </View>
 
-      <TextInput
-        style={styles.input}
-        label="Título"
-        placeholder="Título"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.title}
-        onChangeText={(text) => handleChange("title", text)}
-      />
-      <TextInput
-        style={styles.input}
-        label="Descripción"
-        placeholder="Descripción de la oferta"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.desc}
-        onChangeText={(text) => handleChange("desc", text)}
-      />
-      <TextInput
-        style={styles.input}
-        label="Requisitos"
-        placeholder="Requisitos"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.reqs}
-        onChangeText={(text) => handleChange("reqs", text)}
-      />
-      <TextInput
-        style={styles.input}
-        label="Vacantes"
-        placeholder="Número de vacantes disponibles"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.vacantes}
-        onChangeText={(text) => handleChange("vacantes", text)}
-        keyboardType="numeric" // Use numeric keyboard for numerical input
-      />
-      <TextInput
-        style={styles.input}
-        label="Ubicación"
-        placeholder="Ubicación de la empresa"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.ubi}
-        onChangeText={(text) => handleChange("ubi", text)}
-      />
-      <TextInput
-        style={styles.input}
-        label="Horario"
-        placeholder="Horario"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.horario}
-        onChangeText={(text) => handleChange("horario", text)}
-      />
-      <TextInput
-        style={styles.input}
-        label="Salario"
-        placeholder="Salario"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.paga}
-        onChangeText={(text) => handleChange("paga", text)}
-      />
+          <TextInput
+            style={styles.input}
+            label="Título"
+            placeholder="Título"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.title}
+            onChangeText={(text) => handleChange("title", text)}
+          />
+          <TextInput
+            style={styles.input}
+            label="Descripción"
+            placeholder="Descripción de la oferta"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.desc}
+            onChangeText={(text) => handleChange("desc", text)}
+          />
+          <TextInput
+            style={styles.input}
+            label="Requisitos"
+            placeholder="Requisitos"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.reqs}
+            onChangeText={(text) => handleChange("reqs", text)}
+          />
+          <TextInput
+            style={styles.input}
+            label="Vacantes"
+            placeholder="Número de vacantes disponibles"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.vacantes}
+            onChangeText={(text) => handleChange("vacantes", text)}
+            keyboardType="numeric" // Use numeric keyboard for numerical input
+          />
+          <TextInput
+            style={styles.input}
+            label="Ubicación"
+            placeholder="Ubicación de la empresa"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.ubi}
+            onChangeText={(text) => handleChange("ubi", text)}
+          />
+          <TextInput
+            style={styles.input}
+            label="Horario"
+            placeholder="Horario"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.horario}
+            onChangeText={(text) => handleChange("horario", text)}
+          />
+          <TextInput
+            style={styles.input}
+            label="Salario"
+            placeholder="Salario"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.paga}
+            onChangeText={(text) => handleChange("paga", text)}
+          />
 
-      <TextInput
-        style={styles.input}
-        label="Contacto"
-        placeholder="Contacto"
-        placeholderTextColor="rgb(170 170 170)"
-        value={formValues.contacto}
-        onChangeText={(text) => handleChange("contacto", text)}
-      />
+          <TextInput
+            style={styles.input}
+            label="Contacto"
+            placeholder="Contacto"
+            placeholderTextColor="rgb(170 170 170)"
+            value={formValues.contacto}
+            onChangeText={(text) => handleChange("contacto", text)}
+          />
 
-      <TouchableOpacity style={styles.button2} onPress={handleImagePick}>
-        <Text style={styles.buttonText2}>+ Adjuntar imagen</Text>
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.button2} onPress={handleImagePick}>
+            <Text style={styles.buttonText2}>+ Adjuntar imagen</Text>
+          </TouchableOpacity>
 
-      {formValues.image && (
-        <Image source={{ uri: formValues.image }} style={styles.image} />
-      )}
+          {formValues.image && (
+            <Image source={{ uri: formValues.image }} style={styles.image} />
+          )}
 
-      <TouchableOpacity style={styles.button1} onPress={handleSubmit}>
-        <Text style={styles.buttonText1}>Subir Oferta</Text>
-      </TouchableOpacity>
-    </View>
+          <TouchableOpacity style={styles.button1} onPress={handleSubmit}>
+            <Text style={styles.buttonText1}>Subir Oferta</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
