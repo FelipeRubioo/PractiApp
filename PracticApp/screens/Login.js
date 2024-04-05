@@ -134,10 +134,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     PadreBoton:{
-        alignItems:'center',
-        borderRadius:90,
-        marginTop:75,
-        marginLeft: 30
+        justifyContent: 'center',
+        marginLeft: 25,
+        borderRadius:90
     },
     cajaBoton:{
         backgroundColor:'rgb(1, 51, 151)',
@@ -155,7 +154,6 @@ const styles = StyleSheet.create({
         fontSize:40
     },
     RegistrarseContenedor:{
-        marginTop: 0,
         flexDirection: 'row', // Establece la dirección del contenedor como fila
         alignItems: 'center', // Alinea los elementos verticalmente en el centro
         justifyContent: 'center', // Alinea los elementos horizontalmente en el centro (puedes ajustar esto según sea necesario)

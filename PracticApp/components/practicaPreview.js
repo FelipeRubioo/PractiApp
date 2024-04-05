@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   fecha: {
-    fontSize: 12,
+    fontSize: 14,
     textAlign: 'right',
     marginBottom: 30,
     color: 'rgba(0, 0, 0, .6)'
