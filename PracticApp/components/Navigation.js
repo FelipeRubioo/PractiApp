@@ -36,7 +36,8 @@ import Observe from "../hooks/observer";
 
 const Navigation = () => {
   
-  Observe();
+  //comentario de prueba
+  const rol = Observe();
 
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -47,6 +48,7 @@ const Navigation = () => {
     return (
       <Drawer.Navigator>
         <Drawer.Screen name="Feed" component={Tabs} />
+
       </Drawer.Navigator>
     );
   }
@@ -172,7 +174,7 @@ const Navigation = () => {
   };
 
   const Tabs = () => {
-    const rol = Observe();
+    
     return (
       <Tab.Navigator
         screenOptions={{
