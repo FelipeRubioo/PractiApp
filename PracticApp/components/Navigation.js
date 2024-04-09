@@ -33,10 +33,10 @@ import PracticaCompleta from "../screens/PracticaCompleta";
 import FeedAlumnos from "../screens/FeedAlumnos";
 import Observe from "../hooks/observer";
 
+// roles: 4 facultad, 3 prácticas, 2 maestros, 1 alumnos
 
 const Navigation = () => {
-  
-  Observe();
+  const rol = Observe();
 
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -45,8 +45,32 @@ const Navigation = () => {
   const Drawer = createDrawerNavigator();
   function DrawerTabs() {
     return (
-      <Drawer.Navigator>
+      <Drawer.Navigator drawerPosition='right'>
         <Drawer.Screen name="Feed" component={Tabs} />
+
+        {/* Rol 4 facultad */}
+        {rol === '4' && (
+          <>
+            <Drawer.Screen name="Registrar Coordinador Practicas" component={RegistrarCoordinadorPracticas} />
+            <Drawer.Screen name="Registrar Maestro" component={RegistrarMaestro} />
+          </>
+        )}
+
+        {/* Rol 3 prácticas */}
+        {rol === '3' && (
+          <>
+            <Drawer.Screen name="Registrar Maestro" component={RegistrarMaestro} />
+          </>
+        )}
+        {/* Rol 2 Maestros */}
+        {rol === '2' && (
+          <>
+            <Drawer.Screen name="Registrar Maestro" component={RegistrarMaestro} />
+          </>
+        )}
+
+        {/* Cerrar Sesión */}
+        
       </Drawer.Navigator>
     );
   }
@@ -180,7 +204,7 @@ const Navigation = () => {
             borderTopColor: "white",
             shadowColor: "white",
           },
-          
+
           //headerTitle: (props) => <PracticaHeader {...props} />,
         }}
       >
@@ -218,7 +242,7 @@ const Navigation = () => {
           }}
         >
           {() => <AddPractica />}
-        </Tab.Screen> ) : null }
+        </Tab.Screen>) : null}
       </Tab.Navigator>
     );
   };
