@@ -1,10 +1,26 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, Image } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/es'
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from '../firebaseConfig';
 
 const PracticaCompleta = ({ route }) => {
-  const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha } = route.params
+  const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha, Imagen } = route.params
+  const [imageUrl, setImageUrl] = useState(null);
+
+  useEffect(() => {
+    if (Imagen != "") {
+      const pathRef = ref(storage, `images/${Imagen}`);
+      getDownloadURL(pathRef)
+        .then(url => setImageUrl(url))
+        .catch(error => console.error("Error fetching imagen: ", error)); 
+    }
+  }, [Imagen]);
+
+  // fetch imagen del firebase storage
+  
+  
   //Formato de la fecha
   try{
     var t = new Date(
@@ -24,6 +40,7 @@ const PracticaCompleta = ({ route }) => {
       <Text>Vacantes: {Vacantes}</Text>
       <Text>Contacto: {Contacto}</Text>
       <Text>Fecha: {moment(t).format('LL')}</Text>
+      {Imagen && imageUrl && <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200 }} />}
     </View>
   )
 }
