@@ -1,6 +1,9 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Alert } from "react-native";
+import { storage } from "../firebaseConfig";
+import { ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 export async function postPractica(formValues, navigation) {
   try {
@@ -24,12 +27,21 @@ export async function postPractica(formValues, navigation) {
       Paga: formValues.paga,
       Vacantes: formValues.vacantes,
       Contacto: formValues.contacto,
+      Imagen: formValues.image,
     };
 
-    if (formValues.image) {
+    if (formValues.image != "") {
+      const imageName = v4()+formValues.image.fileName;
+      console.log(imageName);
+      const imageRef = ref(storage, `images/${imageName}`);
+      uploadBytes(imageRef, formValues.image).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+      });
+
+      // Update postData after the image upload is successful
       postData = {
         ...postData,
-        Image: formValues.image, // Include image URL in the data
+        Image: imageName, // Include image URL in the data
       };
     }
 
