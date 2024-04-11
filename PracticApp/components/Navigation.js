@@ -32,6 +32,7 @@ import AddPractica from "../screens/addPractica";
 import PracticaCompleta from "../screens/PracticaCompleta";
 import FeedAlumnos from "../screens/FeedAlumnos";
 import Observe from "../hooks/observer";
+import TipoPractica from '../screens/TipoPractica';
 
 // roles: 4 facultad, 3 prácticas, 2 maestros, 1 alumnos
 
@@ -195,6 +196,24 @@ const Navigation = () => {
     );
   };
 
+  //Grupo que pasa de 'tipo de practica' a la creacion de la practica
+  const StackAgregarPractica = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="TipoPractica"
+          component={TipoPractica}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="addPractica"
+          component={AddPractica}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    );
+  };
+
   const Tabs = () => {
     const rol = Observe();
     return (
@@ -241,7 +260,7 @@ const Navigation = () => {
             headerTitle: (props) => <PracticaHeader {...props} />,
           }}
         >
-          {() => <AddPractica />}
+          {() => <StackAgregarPractica />}
         </Tab.Screen>) : null}
       </Tab.Navigator>
     );
