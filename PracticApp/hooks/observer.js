@@ -15,7 +15,7 @@ export default function Observe() {
       const docSnap = await getDoc(docRef);
       const userData = docSnap.data();
       console.log("Rol de usuario: ",userData.rol);
-      setData(userData.rol)
+      setData(userData.rol);
       // i want to read the data from Usuarios/uid uid being the one i declared in the const above
       
     } else {

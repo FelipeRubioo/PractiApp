@@ -3,11 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 // stack
 import 'react-native-gesture-handler';
 import Navigation from './components/Navigation'
+import { UserProvider } from './context/userContext';
 
 
-export default function App() {   
+export default function App() {
   return (
-    <Navigation />
+    <UserProvider>
+      <Navigation />
+    </UserProvider>
   );
 }
 

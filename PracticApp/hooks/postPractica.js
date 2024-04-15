@@ -27,10 +27,11 @@ export async function postPractica(formValues, navigation) {
       Paga: formValues.paga,
       Vacantes: formValues.vacantes,
       Contacto: formValues.contacto,
+      Autor: formValues.autor,
       Imagen: formValues.image,
     };
 
-    if (formValues.image != "") {
+    if (formValues.image && formValues.image.fileName) {
       const imageName = v4()+formValues.image.fileName;
       console.log(imageName);
       const imageRef = ref(storage, `images/${imageName}`);
@@ -41,7 +42,7 @@ export async function postPractica(formValues, navigation) {
       // Update postData after the image upload is successful
       postData = {
         ...postData,
-        Image: imageName, // Include image URL in the data
+        Imagen: imageName, // Include image URL in the data
       };
     }
 
