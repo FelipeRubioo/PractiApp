@@ -15,12 +15,19 @@ import { v4 } from "uuid";
 import { storage } from "../firebaseConfig";
 import { ref, uploadBytesResumable } from "firebase/storage";
 
+// importar datos de usuario
+import { useUserData } from "../context/userContext";
+
 // img picker
 
 import * as ImagePicker from "expo-image-picker";
 
 const AddPractica = () => {
   const navigation = useNavigation();
+
+  // creamos los datos de usuario
+
+  const userData = useUserData();
 
   // Estados para los valores de los campos del formulario
   // falta imagen
@@ -38,6 +45,7 @@ const AddPractica = () => {
     facultad: "",
     carrera: "",
     image: "",
+    autor: userData.email,
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -49,9 +57,9 @@ const AddPractica = () => {
 
   const handleSubmit = () => {
     if (imageResult && !imageResult.cancelled) {
-      handleImage(imageResult); // Pass the imageResult to handleImage
+      handleImage(imageResult);
     } else {
-      postPractica(formValues, navigation); // No image selected, directly submit
+      postPractica(formValues, navigation);
     }
   };
 
@@ -61,21 +69,21 @@ const AddPractica = () => {
       const imageName = v4() + result.assets[0].fileName;
       setFormValues({ ...formValues, image: imageName });
       const imageRef = ref(storage, `images/${imageName}`);
-  
+
       // Fetch the image data
       const response = await fetch(imageUri);
       const blob = await response.blob();
-  
+
       // Upload the blob to Firebase Storage
-      uploadBytesResumable(imageRef, blob);
-  
+      await uploadBytesResumable(imageRef, blob);
+
       console.log('Image uploaded successfully');
-      postPractica(formValues, navigation); // Submit after image upload
+      postPractica({...formValues, image: imageName}, navigation);
     } catch (error) {
       console.error('Error handling or uploading image:', error);
     }
   };
-  
+
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
