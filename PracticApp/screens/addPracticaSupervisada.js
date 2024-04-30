@@ -22,7 +22,7 @@ import { useUserData } from "../context/userContext";
 
 import * as ImagePicker from "expo-image-picker";
 
-const AddPractica = () => {
+const AddPracticaSupervidada = () => {
   const navigation = useNavigation();
 
   // creamos los datos de usuario
@@ -59,7 +59,7 @@ const AddPractica = () => {
     if (imageResult && !imageResult.cancelled) {
       handleImage(imageResult);
     } else {
-      postPractica(formValues, navigation, tipo = 0);
+      postPractica(formValues, navigation, tipo = 1);
     }
   };
 
@@ -266,4 +266,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddPractica;
+export default AddPracticaSupervidada;

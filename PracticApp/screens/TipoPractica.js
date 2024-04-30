@@ -14,7 +14,7 @@ function TipoPractica() {
         />
         <BotonPractica 
           texto = 'Oferta de práctica supervisada'
-          practica = 'addPractica'
+          practica = 'addPracticaSupervisada'
         />
       </View>
     </SafeAreaView>
