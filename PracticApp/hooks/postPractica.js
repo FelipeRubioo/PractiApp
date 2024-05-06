@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 import moment from 'moment'
 import 'moment/locale/es'
 
-export async function postPractica(formValues, navigation) {
+export async function postPractica(formValues, navigation, tipo) {
   try {
     const childrenCollectionRef = collection(
       db,
@@ -33,7 +33,8 @@ export async function postPractica(formValues, navigation) {
       Contacto: formValues.contacto,
       Autor: formValues.autor,
       Imagen: formValues.image,
-      Fecha: fecha
+      Fecha: fecha,
+      Tipo: tipo
     };
 
     if (formValues.image && formValues.image.fileName) {
