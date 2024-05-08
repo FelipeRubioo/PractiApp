@@ -21,14 +21,6 @@ const PracticaCompleta = ({ route }) => {
   // fetch imagen del firebase storage
   
   
-  //Formato de la fecha
-  try{
-    var t = new Date(
-      Fecha.seconds * 1000 + Fecha.nanoseconds / 1000000
-    );
-  } catch(error){
-    console.error(error)
-  }
   return (
     <View key={id}>
       <Text>Titulo: {Titulo}</Text>
@@ -39,7 +31,7 @@ const PracticaCompleta = ({ route }) => {
       <Text>Paga: {Paga}</Text>
       <Text>Vacantes: {Vacantes}</Text>
       <Text>Contacto: {Contacto}</Text>
-      <Text>Fecha: {moment(t).format('LL')}</Text>
+      <Text>Fecha: {Fecha}</Text>
       {Imagen && imageUrl && <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200 }} />}
     </View>
   )

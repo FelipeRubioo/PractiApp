@@ -33,6 +33,8 @@ import PracticaCompleta from "../screens/PracticaCompleta";
 import FeedAlumnos from "../screens/FeedAlumnos";
 import Observe from "../hooks/observer";
 import TipoPractica from '../screens/TipoPractica';
+import MiPerfil from '../screens/MiPerfil';
+import AddPracticaSupervidada from '../screens/addPracticaSupervisada';
 
 // roles: 4 facultad, 3 prácticas, 2 maestros, 1 alumnos
 
@@ -67,6 +69,12 @@ const Navigation = () => {
         {rol === '2' && (
           <>
             <Drawer.Screen name="Registrar Maestro" component={RegistrarMaestro} />
+          </>
+        )}
+        {/* Rol 1 Alumnos */}
+        {rol === '1' && (
+          <>
+            <Drawer.Screen name="Mi perfil" component={MiPerfil} />
           </>
         )}
 
@@ -208,6 +216,11 @@ const Navigation = () => {
         <Stack.Screen
           name="addPractica"
           component={AddPractica}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="addPracticaSupervisada"
+          component={AddPracticaSupervidada}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -22,17 +22,7 @@ import { useUserData } from "../context/userContext";
 
 import * as ImagePicker from "expo-image-picker";
 
-const AddPractica = () => {
-
-
-  if (tipo == 1) {
-    console.log('Tipo de practica normal');
-  } else if (tipo == 2) {
-    console.log('Tipo de practica supervisada');
-  } else {
-    console.log('no jala : ');
-  }
-
+const AddPracticaSupervidada = () => {
   const navigation = useNavigation();
 
   // creamos los datos de usuario
@@ -56,7 +46,6 @@ const AddPractica = () => {
     carrera: "",
     image: "",
     autor: userData.email,
-    tipo: tipo,
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -70,7 +59,7 @@ const AddPractica = () => {
     if (imageResult && !imageResult.cancelled) {
       handleImage(imageResult);
     } else {
-      postPractica(formValues, navigation, tipo = 0);
+      postPractica(formValues, navigation, tipo = 1);
     }
   };
 
@@ -277,4 +266,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddPractica;
+export default AddPracticaSupervidada;

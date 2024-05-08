@@ -4,8 +4,10 @@ import { Alert } from "react-native";
 import { storage } from "../firebaseConfig";
 import { ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import moment from 'moment'
+import 'moment/locale/es'
 
-export async function postPractica(formValues, navigation) {
+export async function postPractica(formValues, navigation, tipo) {
   try {
     const childrenCollectionRef = collection(
       db,
@@ -17,6 +19,8 @@ export async function postPractica(formValues, navigation) {
       "Practicas",
       "Children"
     );
+
+    var fecha = moment(new Date().toDateString()).format("LL")
 
     let postData = {
       Titulo: formValues.title,
@@ -61,7 +65,7 @@ export async function postPractica(formValues, navigation) {
     const docRef = await addDoc(childrenCollectionRef, postData);
 
     Alert.alert("Listo", "Se publicó la practica", [
-      { text: "Aceptar", onPress: () => navigation.navigate("FeedAlumnos") },
+      { text: "Aceptar", onPress: () => navigation.navigate("Feed") },
     ]);
     console.log("Document written with ID: ", docRef.id);
   } catch (error) {
