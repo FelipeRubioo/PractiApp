@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 function BotonPractica(props) {
   const { navigate } = useNavigation()
   const onPress = () => {
-    navigate(`${props.practica}`)
+    navigate(`${props.practica}`, tipo = props.tipo)
   };
 
   return(
