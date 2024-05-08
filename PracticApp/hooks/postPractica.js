@@ -33,8 +33,7 @@ export async function postPractica(formValues, navigation, tipo) {
       Contacto: formValues.contacto,
       Autor: formValues.autor,
       Imagen: formValues.image,
-      Fecha: fecha,
-      Tipo: tipo
+      Tipo: formValues.tipo,
     };
 
     if (formValues.image && formValues.image.fileName) {
