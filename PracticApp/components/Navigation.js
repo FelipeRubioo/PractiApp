@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerItem, createDrawerNavigator } from '@react-navigation/drawer';
 
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
@@ -48,8 +48,16 @@ const Navigation = () => {
   const Drawer = createDrawerNavigator();
   function DrawerTabs() {
     return (
-      <Drawer.Navigator drawerPosition='right'>
-        <Drawer.Screen name="Feed" component={Tabs} />
+      <Drawer.Navigator>
+        <Drawer.Screen name="Feed" 
+        component={Tabs}
+        options={{
+          headerTitle: (props) => <FeedHeader {...props} />,
+          headerStyle: {
+            backgroundColor: "#013396",
+            height: 120,
+          },
+        }} />
 
         {/* Rol 4 facultad */}
         {rol === '4' && (
@@ -116,12 +124,6 @@ const Navigation = () => {
             <Feather name={"settings"} color={"white"} size={30} />
           </TouchableOpacity>
         </View>
-        <View style={[styles.container]}>
-          <SearchBar lightTheme={"true"} />
-          <TouchableOpacity style={styles.sliders}>
-            <FontAwesome name="sliders" size={30} color="white" />
-          </TouchableOpacity>
-        </View>
       </View>
     );
   };
@@ -169,16 +171,14 @@ const Navigation = () => {
         screenOptions={{
           headerStyle: {
             backgroundColor: "#013396",
-            height: 180,
+            height: 80,
           },
         }}
       >
         <Stack.Screen
           name="FeedAlumnos"
           component={FeedAlumnos}
-          options={{
-            headerTitle: (props) => <FeedHeader {...props} />,
-          }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="PracticaCompleta"
@@ -266,11 +266,7 @@ const Navigation = () => {
                 color={focused ? "#EAA627" : "black"}
               />
             ),
-            headerStyle: {
-              backgroundColor: "#013396",
-              height: 110,
-            },
-            headerTitle: (props) => <PracticaHeader {...props} />,
+            headerShown: false,
           }}
         >
           {() => <StackAgregarPractica />}
