@@ -7,15 +7,23 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  Alert,
   } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/es'
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from '../firebaseConfig';
+import { doc, collection, addDoc, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import UserId from "../hooks/UserId"
 
 const PracticaCompleta = ({ route }) => {
-  const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha, Imagen } = route.params
+  const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params
   const [imageUrl, setImageUrl] = useState(null);
+
+
+  const uid = UserId();
+  console.log("qqqqqq: " + uid);
 
   useEffect(() => {
     if (Imagen != "") {
@@ -30,8 +38,19 @@ const PracticaCompleta = ({ route }) => {
 
 
   //Lo que hace el boton de aplicar practicA
+  const childrenCollectionRef = collection(
+    db,
+    "Campus",
+    "Hermosillo",
+    "Facultades",
+    "Ingeniería",
+    "Ingeniería en Sistemas",
+    "Practicas",
+    "Children",
+  );
   const onPress = () => {
-    
+    updateDoc(doc(childrenCollectionRef, id), {Aplicantes: Aplicantes.concat(uid)});
+    Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
   };
   
   
