@@ -15,6 +15,7 @@ import { v4 } from "uuid";
 import { storage } from "../firebaseConfig";
 import { ref, uploadBytesResumable } from "firebase/storage";
 
+
 // importar datos de usuario
 import { useUserData } from "../context/userContext";
 
@@ -70,7 +71,7 @@ const AddPractica = () => {
     if (imageResult && !imageResult.cancelled) {
       handleImage(imageResult);
     } else {
-      postPractica(formValues, navigation, tipo = 0);
+      postPractica(formValues, navigation);
     }
   };
 
