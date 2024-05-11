@@ -16,11 +16,22 @@ import { storage } from '../firebaseConfig';
 import { doc, collection, addDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import UserId from "../hooks/UserId"
+import ActionButton from 'react-native-action-button';
+import Observe from '../hooks/observer'; 
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import PracticaPreview from '../components/practicaPreview';
+import FeedAlumnos from './FeedAlumnos';
+import EditarPractica from './EditarPractica';
+import VerAplicantesPractica from './VerAplicantesPractica';
 
 const PracticaCompleta = ({ route }) => {
   const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params
   const [imageUrl, setImageUrl] = useState(null);
 
+  const rol = Observe();
+
+  const { navigate } = useNavigation()
 
   const uid = UserId();
   console.log("qqqqqq: " + uid);
@@ -53,7 +64,6 @@ const PracticaCompleta = ({ route }) => {
     Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
   };
   
-  
   return (
     <SafeAreaView>
       <ScrollView>
@@ -81,6 +91,16 @@ const PracticaCompleta = ({ route }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      {(rol == '2') ?
+      <ActionButton buttonColor='#EAA627'>
+        <ActionButton.Item onPress={() => navigate(VerAplicantesPractica)}>
+          <Feather name={"eye"} style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+        <ActionButton.Item onPress={() => navigate(EditarPractica)}>
+          <Feather name={"edit"} style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+      </ActionButton>
+      : null}
     </SafeAreaView>
   )
 }
@@ -113,7 +133,12 @@ const styles = StyleSheet.create({
   },
   textoBoton: {
     color: 'white'
-  }
+  },
+  actionButtonIcon: {
+    fontSize: 25,
+    height: 25,
+    color: 'white',
+  },
 })
 
 export default PracticaCompleta
