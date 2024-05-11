@@ -22,8 +22,7 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import PracticaPreview from '../components/practicaPreview';
 import FeedAlumnos from './FeedAlumnos';
-import EditarPractica from './EditarPractica';
-import VerAplicantesPractica from './VerAplicantesPractica';
+
 
 const PracticaCompleta = ({ route }) => {
   const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params
@@ -35,6 +34,7 @@ const PracticaCompleta = ({ route }) => {
 
   const uid = UserId();
   console.log("qqqqqq: " + uid);
+
 
   useEffect(() => {
     if (Imagen != "") {
@@ -93,10 +93,10 @@ const PracticaCompleta = ({ route }) => {
       </ScrollView>
       {(rol == '2') ?
       <ActionButton buttonColor='#EAA627'>
-        <ActionButton.Item onPress={() => navigate(VerAplicantesPractica)}>
+        <ActionButton.Item onPress={() => navigate('VerAplicantesPractica', {aplicantes: Aplicantes})}>
           <Feather name={"eye"} style={styles.actionButtonIcon} />
         </ActionButton.Item>
-        <ActionButton.Item onPress={() => navigate(EditarPractica)}>
+        <ActionButton.Item onPress={() => navigate('EditarPractica')}>
           <Feather name={"edit"} style={styles.actionButtonIcon} />
         </ActionButton.Item>
       </ActionButton>
