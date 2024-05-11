@@ -12,6 +12,8 @@ const Registrarse = (props) => {
   const [lastName, setLastName] = useState('');
   const [campus, setCampus] = useState('');
   const [career, setCareer] = useState('');
+  const [desc, setDesc] = useState('');
+  const [hab, setHab] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
@@ -31,10 +33,10 @@ const Registrarse = (props) => {
     }
 
     // Aquí puedes implementar la lógica para enviar los datos del formulario
-    console.log('Formulario enviado:', { email, name, lastName, campus, career, password, confirmPassword });
+    console.log('Formulario enviado:', { email, name, lastName, campus, career, desc, hab, password, confirmPassword });
 
     rol = "1"
-    createUser(email, password, name, lastName, campus, rol, career);
+    createUser(email, password, name, lastName, campus, rol, career, desc, hab);
   };
   
   // Ir al Login
@@ -106,6 +108,24 @@ const Registrarse = (props) => {
             items={[
               { label: "Ingeniería en Sistemas", value: "Ingeniería en Sistemas"}
             ]}
+          />
+        </View>
+        <View>
+          <Text style={styles.textInfo}>Descripción</Text>
+          <TextInput
+                style={styles.input}
+                value={desc}
+                onChangeText={setDesc}
+                placeholder="Ingrese una breve descripción"
+          />
+        </View>
+        <View>
+          <Text style={styles.textInfo}>Habilidades</Text>
+          <TextInput
+                style={styles.input}
+                value={hab}
+                onChangeText={setHab}
+                placeholder="Ingrese sus habilidades en la carrera"
           />
         </View>
         <View>

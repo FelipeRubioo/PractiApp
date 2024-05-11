@@ -7,12 +7,14 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [userData, setUserData] = useState(null);
+    const [uid, setUid] = useState(null);
 
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const uid = user.uid;
+                setUid(uid); // Set uid in the state
                 try {
                     const docRef = doc(db, "Usuarios", uid);
                     const docSnap = await getDoc(docRef);
@@ -28,6 +30,7 @@ export const UserProvider = ({ children }) => {
                 }
             } else {
                 setUserData(null);
+                setUid(null); // Reset uid when user is not authenticated
             }
         });
 
@@ -35,7 +38,7 @@ export const UserProvider = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={userData}>
+        <UserContext.Provider value={{ userData, uid }}>
             {children}
         </UserContext.Provider>
     );
