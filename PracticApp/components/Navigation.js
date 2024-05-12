@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import { DrawerItem, createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerItem, DrawerToggleButton, createDrawerNavigator } from '@react-navigation/drawer';
 
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
@@ -35,6 +35,8 @@ import Observe from "../hooks/observer";
 import TipoPractica from '../screens/TipoPractica';
 import MiPerfil from '../screens/MiPerfil';
 import AddPracticaSupervidada from '../screens/addPracticaSupervisada';
+import EditarPractica from '../screens/EditarPractica';
+import VerAplicantesPractica from '../screens/VerAplicantesPractica';
 
 // roles: 4 facultad, 3 prácticas, 2 maestros, 1 alumnos
 
@@ -53,6 +55,7 @@ const Navigation = () => {
         component={Tabs}
         options={{
           headerTitle: (props) => <FeedHeader {...props} />,
+          headerTintColor: 'white',
           headerStyle: {
             backgroundColor: "#013396",
             height: 120,
@@ -194,11 +197,33 @@ const Navigation = () => {
             },
           }}
         />
-        <Stack.Screen name="AddPractica" component={AddPractica} />
-        <Stack.Screen
-          name="WelcomeScreen"
-          component={WelcomeScreen}
-          options={{ headerShown: false }}
+        <Stack.Screen 
+          name="EditarPractica"
+          component={EditarPractica}
+          options={{
+            title: "Practica",
+            headerTitleStyle: {
+              fontSize: 25,
+            },
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "#013396",
+            },
+          }}
+        />
+        <Stack.Screen 
+          name="VerAplicantesPractica"
+          component={VerAplicantesPractica}
+          options={{
+            title: "Practica",
+            headerTitleStyle: {
+              fontSize: 25,
+            },
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "#013396",
+            },
+          }}
         />
       </Stack.Navigator>
     );
@@ -233,8 +258,8 @@ const Navigation = () => {
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
-            borderTopColor: "white",
-            shadowColor: "white",
+            //borderTopColor: "white",
+            //shadowColor: "white",
           },
 
           //headerTitle: (props) => <PracticaHeader {...props} />,
