@@ -38,7 +38,7 @@ const AddPractica = () => {
 
   // creamos los datos de usuario
 
-  const userData = useUserData();
+  const { userData } = useUserData();
 
   // Estados para los valores de los campos del formulario
   // falta imagen
