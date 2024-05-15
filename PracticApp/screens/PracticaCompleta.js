@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Alert,
+  Animated,
   } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/es'
@@ -16,7 +17,6 @@ import { storage } from '../firebaseConfig';
 import { doc, collection, addDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import UserId from "../hooks/UserId"
-import ActionButton from 'react-native-action-button';
 import Observe from '../hooks/observer'; 
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -63,6 +63,40 @@ const PracticaCompleta = ({ route }) => {
     updateDoc(doc(childrenCollectionRef, id), {Aplicantes: Aplicantes.concat(uid)});
     Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
   };
+
+  //Botones del action boton
+  const [icon_1] = useState(new Animated.Value(40));
+  const [icon_2] = useState(new Animated.Value(40));
+
+  const [pop, setPop] = useState(false);
+
+  const popIn = () => {
+    setPop(true);
+    Animated.timing(icon_1, {
+      toValue: 90,
+      duration: 400,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(icon_2, {
+      toValue: 160,
+      duration: 400,
+      useNativeDriver: false,
+    }).start();
+  }
+
+  const popOut = () => {
+    setPop(false);
+    Animated.timing(icon_1, {
+      toValue: 20,
+      duration: 400,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(icon_2, {
+      toValue: 20,
+      duration: 400,
+      useNativeDriver: false,
+    }).start();
+  }
   
   return (
     <SafeAreaView>
@@ -91,15 +125,32 @@ const PracticaCompleta = ({ route }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      {/* ACtion Button */}
       {(rol == '2') ?
-      <ActionButton buttonColor='#EAA627'>
-        <ActionButton.Item onPress={() => navigate('VerAplicantesPractica', {aplicantes: Aplicantes})}>
-          <Feather name={"eye"} style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-        <ActionButton.Item onPress={() => navigate('EditarPractica')}>
-          <Feather name={"edit"} style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-      </ActionButton>
+      <View style={{
+        flex: 1
+      }}>
+        <Animated.View style={[styles.circle, { bottom: icon_1 }]}>
+          <TouchableOpacity onPress={() => navigate('EditarPractica')}>
+            <Feather name={"edit"} size={25} color="#FFF" />
+          </TouchableOpacity>
+        </Animated.View>
+        <Animated.View style={[styles.circle, { bottom: icon_2 }]}>
+          <TouchableOpacity  onPress={() => navigate('VerAplicantesPractica', {aplicantes: Aplicantes})}>
+            <Feather name={"eye"} size={25} color="#FFF" />
+          </TouchableOpacity>
+        </Animated.View>
+        <TouchableOpacity
+          style={styles.circle}
+          onPress={() => {
+            pop === false ? popIn() : popOut();
+          }}
+        >
+          {(pop === false) ? 
+            <Feather name={"plus"} size={25} color="#FFF" />
+          : <Feather name={"x"} size={25} color="#FFF" />}
+        </TouchableOpacity>
+      </View>
       : null}
     </SafeAreaView>
   )
@@ -134,11 +185,17 @@ const styles = StyleSheet.create({
   textoBoton: {
     color: 'white'
   },
-  actionButtonIcon: {
-    fontSize: 25,
-    height: 25,
-    color: 'white',
-  },
+  circle: {
+    backgroundColor: '#EAA627',
+    width: 60,
+    height: 60,
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 })
 
 export default PracticaCompleta

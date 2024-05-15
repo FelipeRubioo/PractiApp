@@ -296,6 +296,21 @@ const Navigation = () => {
         >
           {() => <StackAgregarPractica />}
         </Tab.Screen>) : null}
+        {(rol == '1') ? (<Tab.Screen
+          name="   "
+          component={MiPerfil}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name={"user"}
+                size={30}
+                color={focused ? "#EAA627" : "black"}
+              />
+            ),
+            headerShown: false,
+          }}
+        />)
+        : null}
       </Tab.Navigator>
     );
   };
