@@ -8,7 +8,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useUserData } from "../context/userContext";
 import UserId from "../hooks/UserId";
 
-import ActionButton from 'react-native-action-button';
 import { Feather } from "@expo/vector-icons";
 
 const MiPerfil = () => {
@@ -122,7 +121,18 @@ const MiPerfil = () => {
                 </View>
             </ScrollView>
             {!isEditable && (
-                <ActionButton buttonColor='#EAA627' onPress={() => setIsEditable(true)} buttonText={<Feather name={"edit"} style={styles.actionButtonIcon} />} />
+                <View style={{
+                    flex: 1
+                }}>      
+                    <TouchableOpacity
+                        style={styles.circle}
+                        onPress={() => {
+                            setIsEditable(true)
+                        }}
+                    >
+                        <Feather name={"edit"} size={25} color="#FFF" />
+                    </TouchableOpacity>
+                </View>
             )}
         </SafeAreaView>
     );
@@ -168,7 +178,18 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingVertical: 3,
         paddingHorizontal: 10,
-    }
+    },
+    circle: {
+        backgroundColor: '#EAA627',
+        width: 60,
+        height: 60,
+        position: 'absolute',
+        bottom: 20,
+        right: 0,
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }
 });
 
 export default MiPerfil;
