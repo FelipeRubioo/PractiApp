@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { 
+import {
   View,
   Text,
   Image,
@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Alert,
   Animated,
-  } from 'react-native'
+} from 'react-native'
 import moment from 'moment'
 import 'moment/locale/es'
 import { getDownloadURL, ref } from "firebase/storage";
@@ -17,15 +17,19 @@ import { storage } from '../firebaseConfig';
 import { doc, collection, addDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import UserId from "../hooks/UserId"
-import Observe from '../hooks/observer'; 
+import Observe from '../hooks/observer';
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import PracticaPreview from '../components/practicaPreview';
 import FeedAlumnos from './FeedAlumnos';
 
+import { useUserData } from "../context/userContext";
+
 
 const PracticaCompleta = ({ route }) => {
-  const { id, Titulo, Desc, Requisitos, Vacantes, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params
+  const { userData } = useUserData();
+
+  const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params;
   const [imageUrl, setImageUrl] = useState(null);
 
   const rol = Observe();
@@ -41,7 +45,7 @@ const PracticaCompleta = ({ route }) => {
       const pathRef = ref(storage, `images/${Imagen}`);
       getDownloadURL(pathRef)
         .then(url => setImageUrl(url))
-        .catch(error => console.error("Error fetching imagen: ", error)); 
+        .catch(error => console.error("Error fetching imagen: ", error));
     }
   }, [Imagen]);
 
@@ -60,7 +64,7 @@ const PracticaCompleta = ({ route }) => {
     "Children",
   );
   const onPress = () => {
-    updateDoc(doc(childrenCollectionRef, id), {Aplicantes: Aplicantes.concat(uid)});
+    updateDoc(doc(childrenCollectionRef, id), { Aplicantes: Aplicantes.concat(uid) });
     Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
   };
 
@@ -97,7 +101,7 @@ const PracticaCompleta = ({ route }) => {
       useNativeDriver: false,
     }).start();
   }
-  
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -120,38 +124,40 @@ const PracticaCompleta = ({ route }) => {
           <Text style={styles.subtitulo}>Categorias de esta Oferta</Text>
           <Text style={styles.texto}>Desarrollo Web</Text>
           {Imagen && imageUrl && <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200 }} />}
-          <TouchableOpacity style={styles.boton} onPress={onPress}>
-            <Text style={styles.textoBoton}>Aplicar a esta oferta</Text>
-          </TouchableOpacity>
+          {userData.rol == '1' && (
+            <TouchableOpacity style={styles.boton} onPress={onPress}>
+              <Text style={styles.textoBoton}>Aplicar a esta oferta</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
       {/* ACtion Button */}
-      {(rol == '2') ?
-      <View style={{
-        flex: 1
-      }}>
-        <Animated.View style={[styles.circle, { bottom: icon_1 }]}>
-          <TouchableOpacity onPress={() => navigate('EditarPractica')}>
-            <Feather name={"edit"} size={25} color="#FFF" />
+      {['3', '4'].includes(userData.rol) || (userData.rol == "2" && userData.email == Autor) ?
+        <View style={{
+          flex: 1
+        }}>
+          <Animated.View style={[styles.circle, { bottom: icon_1 }]}>
+            <TouchableOpacity onPress={() => navigate('EditarPractica', { ...route.params })}>
+              <Feather name={"edit"} size={25} color="#FFF" />
+            </TouchableOpacity>
+          </Animated.View>
+          <Animated.View style={[styles.circle, { bottom: icon_2 }]}>
+            <TouchableOpacity onPress={() => navigate('VerAplicantesPractica', { aplicantes: Aplicantes })}>
+              <Feather name={"eye"} size={25} color="#FFF" />
+            </TouchableOpacity>
+          </Animated.View>
+          <TouchableOpacity
+            style={styles.circle}
+            onPress={() => {
+              pop === false ? popIn() : popOut();
+            }}
+          >
+            {(pop === false) ?
+              <Feather name={"plus"} size={25} color="#FFF" />
+              : <Feather name={"x"} size={25} color="#FFF" />}
           </TouchableOpacity>
-        </Animated.View>
-        <Animated.View style={[styles.circle, { bottom: icon_2 }]}>
-          <TouchableOpacity  onPress={() => navigate('VerAplicantesPractica', {aplicantes: Aplicantes})}>
-            <Feather name={"eye"} size={25} color="#FFF" />
-          </TouchableOpacity>
-        </Animated.View>
-        <TouchableOpacity
-          style={styles.circle}
-          onPress={() => {
-            pop === false ? popIn() : popOut();
-          }}
-        >
-          {(pop === false) ? 
-            <Feather name={"plus"} size={25} color="#FFF" />
-          : <Feather name={"x"} size={25} color="#FFF" />}
-        </TouchableOpacity>
-      </View>
-      : null}
+        </View>
+        : null}
     </SafeAreaView>
   )
 }
