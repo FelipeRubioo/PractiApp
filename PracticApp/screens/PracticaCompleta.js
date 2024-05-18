@@ -29,7 +29,7 @@ import { useUserData } from "../context/userContext";
 const PracticaCompleta = ({ route }) => {
   const { userData } = useUserData();
 
-  const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params
+  const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params;
   const [imageUrl, setImageUrl] = useState(null);
 
   const rol = Observe();
@@ -137,7 +137,7 @@ const PracticaCompleta = ({ route }) => {
           flex: 1
         }}>
           <Animated.View style={[styles.circle, { bottom: icon_1 }]}>
-            <TouchableOpacity onPress={() => navigate('EditarPractica')}>
+            <TouchableOpacity onPress={() => navigate('EditarPractica', { ...route.params })}>
               <Feather name={"edit"} size={25} color="#FFF" />
             </TouchableOpacity>
           </Animated.View>
