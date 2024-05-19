@@ -69,8 +69,8 @@ const PracticaCompleta = ({ route }) => {
   };
 
   //Botones del action boton
-  const [icon_1] = useState(new Animated.Value(40));
-  const [icon_2] = useState(new Animated.Value(40));
+  const [icon_1] = useState(new Animated.Value(20));
+  const [icon_2] = useState(new Animated.Value(20));
 
   const [pop, setPop] = useState(false);
 
