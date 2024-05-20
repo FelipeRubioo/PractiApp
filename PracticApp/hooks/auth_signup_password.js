@@ -5,7 +5,7 @@ import { doc, setDoc, collection } from "firebase/firestore"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
-export const createUser = async (email, password, name, lastName, campus, rol, career = " ", phone = " ", department = " ") => {
+export const createUser = async (email, password, name, lastName, campus, rol, career = " ", phone = " ", department = " ", desc, hab, estatus) => {
   try {
     //se guarda usuario en auth
     const userCredential = await createUserWithEmailAndPassword(
@@ -22,7 +22,10 @@ export const createUser = async (email, password, name, lastName, campus, rol, c
         lname: lastName,
         campus: campus,
         carrera: career,
-        rol: rol
+        rol: rol,
+        desc: desc,
+        hab: hab,
+        estatus: estatus
       });
 
     } else if (rol == "2") {

@@ -37,6 +37,7 @@ import MiPerfil from '../screens/MiPerfil';
 import AddPracticaSupervidada from '../screens/addPracticaSupervisada';
 import EditarPractica from '../screens/EditarPractica';
 import VerAplicantesPractica from '../screens/VerAplicantesPractica';
+import SolicitudAplicante from './SolicitudAplicante';
 
 // roles: 4 facultad, 3 prácticas, 2 maestros, 1 alumnos
 
@@ -181,7 +182,7 @@ const Navigation = () => {
         <Stack.Screen
           name="FeedAlumnos"
           component={FeedAlumnos}
-          options={{headerShown: false}}
+          options={{headerShown: false, unmountOnBlur: true,}}
         />
         <Stack.Screen
           name="PracticaCompleta"
@@ -214,6 +215,20 @@ const Navigation = () => {
         <Stack.Screen 
           name="VerAplicantesPractica"
           component={VerAplicantesPractica}
+          options={{
+            title: "Practica",
+            headerTitleStyle: {
+              fontSize: 25,
+            },
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "#013396",
+            },
+          }}
+        />
+        <Stack.Screen 
+          name="SolicitudAplicante"
+          component={SolicitudAplicante}
           options={{
             title: "Practica",
             headerTitleStyle: {
@@ -334,7 +349,7 @@ const Navigation = () => {
         <Stack.Screen
           name="Feed"
           component={DrawerTabs}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, unmountOnBlur: true, }}
         />
         <Stack.Screen
           name="OlvidePassword"

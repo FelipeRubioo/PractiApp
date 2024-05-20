@@ -36,7 +36,8 @@ const Registrarse = (props) => {
     console.log('Formulario enviado:', { email, name, lastName, campus, career, desc, hab, password, confirmPassword });
 
     rol = "1"
-    createUser(email, password, name, lastName, campus, rol, career, desc, hab);
+    estatus = "0"
+    createUser(email, password, name, lastName, campus, rol, career, phone='', dep='' ,desc, hab, estatus);
   };
   
   // Ir al Login

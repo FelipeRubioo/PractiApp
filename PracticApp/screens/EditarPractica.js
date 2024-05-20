@@ -105,56 +105,63 @@ const EditarPractica = ({ route }) => {
     <SafeAreaView>
       <ScrollView>
         <View key={id} style={styles.container}>
-          <Text>Editar Pr&aacute;ctica</Text>
+          <Text style={styles.titulo}>Editar oferta de Pr&aacute;ctica</Text>
           <TextInput
             value={editedData.Titulo}
             onChangeText={(text) => setEditedData({ ...editedData, Titulo: text })}
             editable={true}
+            style={styles.textoEditable}
           />
-          <Text style={styles.subtitulo}>Descripción</Text>
+          <Text style={styles.subtitulos}>Descripción</Text>
           <TextInput
             value={editedData.Desc}
             onChangeText={(text) => setEditedData({ ...editedData, Desc: text })}
             editable={true}
+            style={styles.textoEditable}
           />
-          <Text style={styles.subtitulo}>Requisitos</Text>
+          <Text style={styles.subtitulos}>Requisitos</Text>
           <TextInput
             value={editedData.Requisitos}
             onChangeText={(text) => setEditedData({ ...editedData, Requisitos: text })}
             editable={true}
+            style={styles.textoEditable}
           />
-          <Text style={styles.subtitulo}>Número de Vacantes</Text>
+          <Text style={styles.subtitulos}>Número de Vacantes</Text>
           <TextInput
             value={editedData.Vacantes}
             onChangeText={(text) => setEditedData({ ...editedData, Vacantes: text })}
             editable={true}
+            style={styles.textoEditable}
           />
-          <Text style={styles.subtitulo}>Ubicación de la empresa</Text>
+          <Text style={styles.subtitulos}>Ubicación de la empresa</Text>
           <TextInput
             value={editedData.Ubi}
             onChangeText={(text) => setEditedData({ ...editedData, Ubi: text })}
             editable={true}
+            style={styles.textoEditable}
           />
-          <Text style={styles.subtitulo}>Horario</Text>
+          <Text style={styles.subtitulos}>Horario</Text>
           <TextInput
             value={editedData.Horario}
             onChangeText={(text) => setEditedData({ ...editedData, Horario: text })}
             editable={true}
           />
-          <Text style={styles.subtitulo}>Apoyo Económico</Text>
+          <Text style={styles.subtitulos}>Apoyo Económico</Text>
           <TextInput
             value={editedData.Paga}
             onChangeText={(text) => setEditedData({ ...editedData, Paga: text })}
             editable={true}
+            style={styles.textoEditable}
           />
-          <Text style={styles.subtitulo}>Fecha de Expiración</Text>
+          <Text style={styles.subtitulos}>Fecha de Expiración</Text>
           <TextInput
             value={editedData.Fecha}
             onChangeText={(text) => setEditedData({ ...editedData, Fecha: text })}
             editable={true}
+            style={styles.textoEditable}
           />
-          <Text style={styles.subtitulo}>Categorias de esta Oferta</Text>
-          <Text style={styles.texto}>Desarrollo Web</Text>
+          <Text style={styles.subtitulos}>Categorias de esta Oferta</Text>
+          <Text style={styles.textoEditable}>Desarrollo Web</Text>
           {selectedImage ? (
             <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} />
           ) : (
@@ -180,8 +187,8 @@ const EditarPractica = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingTop: 12,
+    paddingHorizontal: 30,
   },
   button2: {
     backgroundColor: '#36AF46',
@@ -198,6 +205,26 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
   },
+  textoEditable: {
+    fontSize: 16,
+    color: '#000',
+    borderWidth: 1,
+    borderColor: '#C1C7D0',
+    borderRadius: 5,
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+  },
+  titulo: {
+    fontWeight: '500',
+    fontSize: 24,
+    paddingBottom: 6,
+  },
+  subtitulos: {
+      fontSize: 20,
+      color: '#013396',
+      paddingVertical: 6,
+  },
+  
 });
 
 export default EditarPractica;
