@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { DrawerItem, DrawerToggleButton, createDrawerNavigator } from '@react-navigation/drawer';
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -10,7 +10,6 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import db from "../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -38,6 +37,10 @@ import AddPracticaSupervidada from '../screens/addPracticaSupervisada';
 import EditarPractica from '../screens/EditarPractica';
 import VerAplicantesPractica from '../screens/VerAplicantesPractica';
 
+// auth
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 // roles: 4 facultad, 3 prácticas, 2 maestros, 1 alumnos
 
 const Navigation = () => {
@@ -45,6 +48,21 @@ const Navigation = () => {
 
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
+
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsSignedIn(true);
+      } else {
+        setIsSignedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   // drawer
   const Drawer = createDrawerNavigator();
@@ -65,7 +83,7 @@ const Navigation = () => {
         {/* Rol 4 facultad */}
         {rol === '4' && (
           <>
-            <Drawer.Screen name="Registrar Coordinador Practicas" component={RegistrarCoordinadorPracticas} />
+            <Drawer.Screen name="Registrar Coordinador de Practicas" component={RegistrarCoordinadorPracticas} />
             <Drawer.Screen name="Registrar Maestro" component={RegistrarMaestro} />
           </>
         )}
@@ -111,6 +129,7 @@ const Navigation = () => {
             onPress: () => {
               singOut();
               navigation.popToTop();
+              setIsSignedIn(false);
               // TODO:
               //navigation.dispatch(StackActions.popToTop());
             },
@@ -148,6 +167,7 @@ const Navigation = () => {
             onPress: () => {
               singOut();
               navigation.popToTop();
+              setIsSignedIn(false);
               // TODO:
               //navigation.dispatch(StackActions.popToTop());
             },
