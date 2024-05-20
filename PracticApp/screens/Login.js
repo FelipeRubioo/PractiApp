@@ -57,11 +57,11 @@ export default function Login(props) {
                     <TextInput placeholder='' style={{paddingHorizontal:15}} secureTextEntry={true}
                     onChangeText={(text)=>setPassword(text)} />
                 </View>
-                <View style={{alignItems:'center'}}>
+                {/* <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={OlvidePassword}>
                         <Text style={{color:'rgb(247, 161, 26)', textDecorationLine: 'underline'}}>¿Olvidaste la contraseña?</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
             <View style={styles.tarjetaBottom}>
                 <View style={styles.RegistrarseContenedor}>
