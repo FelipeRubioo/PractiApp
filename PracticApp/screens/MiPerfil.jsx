@@ -28,7 +28,7 @@ const MiPerfil = () => {
 
     const handleSave = async () => {
         try {
-            await updateDoc(userRef, editedData )
+            await updateDoc(userRef, editedData)
             console.log("Datos guardados", editedData);
             setIsEditable(false);
         } catch (error) {
@@ -88,33 +88,33 @@ const MiPerfil = () => {
                     />
                     <Text style={styles.subtitulos} >Descripción</Text>
                     <TextInput
-                        value={
-                            userData.desc == null
-                                ? "No has agregado una descripción"
-                                : userData.desc
-                        }
+                        placeholder={userData.desc == null
+                            ? "No has agregado una descripción"
+                            : userData.desc}
+                        value={isEditable ? editedData.desc : userData.desc}
                         onChangeText={(text) => setEditedData({ ...editedData, desc: text })}
                         editable={isEditable}
                         style={isEditable ? styles.textoEditable : styles.texto}
                     />
                     <Text style={styles.subtitulos} >Habilidades</Text>
                     <TextInput
-                        value={
+                        placeholder={
                             userData.hab == null
                                 ? "No has agregado tus habilidades"
                                 : userData.hab
                         }
+                        value={isEditable ? editedData.hab : userData.hab}
                         onChangeText={(text) => setEditedData({ ...editedData, hab: text })}
                         editable={isEditable}
-                        style={[{marginBottom: 12}, (isEditable ? styles.textoEditable : styles.texto)]}
+                        style={[{ marginBottom: 12 }, (isEditable ? styles.textoEditable : styles.texto)]}
                     />
                     {isEditable && (
                         <View>
-                            <TouchableOpacity onPress={handleSave} style={[{backgroundColor: '#36AF46'}, styles.boton]}>
-                                <Text style={{color: '#fff'}}>Guardar información</Text>
+                            <TouchableOpacity onPress={handleSave} style={[{ backgroundColor: '#36AF46' }, styles.boton]}>
+                                <Text style={{ color: '#fff' }}>Guardar información</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={handleCancel} style={[{backgroundColor: '#FF3649'}, styles.boton]}>
-                                <Text style={{color: '#fff'}}>Cancelar</Text>
+                            <TouchableOpacity onPress={handleCancel} style={[{ backgroundColor: '#FF3649' }, styles.boton]}>
+                                <Text style={{ color: '#fff' }}>Cancelar</Text>
                             </TouchableOpacity>
                         </View>
                     )}
@@ -123,7 +123,7 @@ const MiPerfil = () => {
             {!isEditable && (
                 <View style={{
                     flex: 1
-                }}>      
+                }}>
                     <TouchableOpacity
                         style={styles.circle}
                         onPress={() => {
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-      }
+    }
 });
 
 export default MiPerfil;
