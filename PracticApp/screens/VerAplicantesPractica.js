@@ -4,7 +4,7 @@ import UserName from '../hooks/UserName';
 import SolicitudAplicante from '../components/SolicitudAplicante';
 
 const VerAplicantesPractica = ({ route }) => {
-  const { aplicantes } = route.params
+  const { aplicantes, pid, vacantes, integrantes } = route.params
 
   const user = UserName("Lq4QMlEcYbXblWLCCVclVJ7IBZ92");
 
@@ -16,7 +16,12 @@ const VerAplicantesPractica = ({ route }) => {
 
   const renderItem = ({ item, index }) => (
     <SolicitudAplicante
-      name = {item}
+      uid = {item}
+      index = {index}
+      aplicantes = {aplicantes}
+      pid = {pid}
+      vacantes = {vacantes}
+      integrantes = {integrantes}
     />
   );
 
@@ -25,7 +30,7 @@ const VerAplicantesPractica = ({ route }) => {
       <View>
         <Text style={styles.titulo}>Aplicantes de esta oferta</Text>
         <FlatList
-          data={nombre}
+          data={aplicantes}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />

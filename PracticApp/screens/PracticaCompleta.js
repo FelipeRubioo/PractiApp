@@ -29,7 +29,7 @@ import { useUserData } from "../context/userContext";
 const PracticaCompleta = ({ route }) => {
   const { userData, uid } = useUserData();
 
-  const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params;
+  const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes, Integrantes } = route.params;
   const [imageUrl, setImageUrl] = useState(null);
 
   const rol = Observe();
@@ -82,8 +82,8 @@ const PracticaCompleta = ({ route }) => {
   };
 
   //Botones del action boton
-  const [icon_1] = useState(new Animated.Value(40));
-  const [icon_2] = useState(new Animated.Value(40));
+  const [icon_1] = useState(new Animated.Value(20));
+  const [icon_2] = useState(new Animated.Value(20));
 
   const [pop, setPop] = useState(false);
 
@@ -155,7 +155,7 @@ const PracticaCompleta = ({ route }) => {
             </TouchableOpacity>
           </Animated.View>
           <Animated.View style={[styles.circle, { bottom: icon_2 }]}>
-            <TouchableOpacity onPress={() => navigate('VerAplicantesPractica', { aplicantes: Aplicantes })}>
+            <TouchableOpacity onPress={() => navigate('VerAplicantesPractica', { aplicantes: Aplicantes , pid: id, vacantes: Vacantes, integrantes: Integrantes })}>
               <Feather name={"eye"} size={25} color="#FFF" />
             </TouchableOpacity>
           </Animated.View>
