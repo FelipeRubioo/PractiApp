@@ -35,6 +35,8 @@ export async function postPractica(formValues, navigation) {
       Imagen: formValues.image,
       Tipo: formValues.tipo,
       Fecha: fecha,
+      Aplicantes: [],
+      Integrantes: [],
     };
 
     if (formValues.image && formValues.image.fileName) {

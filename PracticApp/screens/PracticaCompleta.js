@@ -29,7 +29,7 @@ import { useUserData } from "../context/userContext";
 const PracticaCompleta = ({ route }) => {
   const { userData } = useUserData();
 
-  const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes } = route.params;
+  const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes, Integrantes } = route.params;
   const [imageUrl, setImageUrl] = useState(null);
 
   const rol = Observe();
@@ -63,9 +63,20 @@ const PracticaCompleta = ({ route }) => {
     "Practicas",
     "Children",
   );
+
+  const collectionUser = collection(
+    db,
+    "Usuarios"
+  );
+
   const onPress = () => {
-    updateDoc(doc(childrenCollectionRef, id), { Aplicantes: Aplicantes.concat(uid) });
-    Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
+    if(userData.estatus == "0"){
+      updateDoc(doc(collectionUser, uid), { estatus: "1"})
+      updateDoc(doc(childrenCollectionRef, id), { Aplicantes: Aplicantes.concat(uid) });
+      Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
+    } else{
+      Alert.alert("Ya estas inscrito en una practica");
+    }
   };
 
   //Botones del action boton
@@ -142,7 +153,7 @@ const PracticaCompleta = ({ route }) => {
             </TouchableOpacity>
           </Animated.View>
           <Animated.View style={[styles.circle, { bottom: icon_2 }]}>
-            <TouchableOpacity onPress={() => navigate('VerAplicantesPractica', { aplicantes: Aplicantes })}>
+            <TouchableOpacity onPress={() => navigate('VerAplicantesPractica', { aplicantes: Aplicantes , pid: id, vacantes: Vacantes, integrantes: Integrantes })}>
               <Feather name={"eye"} size={25} color="#FFF" />
             </TouchableOpacity>
           </Animated.View>
