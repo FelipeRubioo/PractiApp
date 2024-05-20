@@ -14,7 +14,7 @@ import moment from 'moment'
 import 'moment/locale/es'
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from '../firebaseConfig';
-import { doc, collection, addDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, collection, getDoc, addDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import UserId from "../hooks/UserId"
 import Observe from '../hooks/observer';
@@ -27,7 +27,7 @@ import { useUserData } from "../context/userContext";
 
 
 const PracticaCompleta = ({ route }) => {
-  const { userData } = useUserData();
+  const { userData, uid } = useUserData();
 
   const { id, Titulo, Desc, Requisitos, Vacantes, Autor, Contacto, Horario, Paga, Ubi, Fecha, Imagen, Aplicantes, Integrantes } = route.params;
   const [imageUrl, setImageUrl] = useState(null);
@@ -36,7 +36,6 @@ const PracticaCompleta = ({ route }) => {
 
   const { navigate } = useNavigation()
 
-  const uid = UserId();
   console.log("qqqqqq: " + uid);
 
 
@@ -63,19 +62,22 @@ const PracticaCompleta = ({ route }) => {
     "Practicas",
     "Children",
   );
-
-  const collectionUser = collection(
-    db,
-    "Usuarios"
-  );
-
-  const onPress = () => {
-    if(userData.estatus == "0"){
-      updateDoc(doc(collectionUser, uid), { estatus: "1"})
-      updateDoc(doc(childrenCollectionRef, id), { Aplicantes: Aplicantes.concat(uid) });
-      Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
-    } else{
-      Alert.alert("Ya estas inscrito en una practica");
+  
+  const onPress = async () => {
+    try {
+      const docRef = doc(childrenCollectionRef, id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // aqui checa si ya existe un array y si no lo inicializa
+        const currentAplicantes = docSnap.data().Aplicantes || [];
+        await updateDoc(docRef, { Aplicantes: [...currentAplicantes, uid] });
+        Alert.alert("Has aplicado a esta oferta. En caso de ser elegido, se te notificara");
+      } else {
+        Alert.alert("Documento no encontrado");
+      }
+    } catch (error) {
+      console.error("Error actualizando doc: ", error);
+      Alert.alert("Error al aplicar a la oferta");
     }
   };
 
